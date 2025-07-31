@@ -287,6 +287,8 @@
                 if (result.candidates && result.candidates.length > 0 && result.candidates[0].content.parts.length > 0) {
                     return result.candidates[0].content.parts[0].text;
                 } else {
+                     // If the API returns a response but it's empty or malformed, treat it as an error.
+                     console.error("API response was empty or malformed:", result);
                      throw new Error("No content received from API.");
                 }
 
