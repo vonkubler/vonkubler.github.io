@@ -43,6 +43,13 @@
             <!-- Data will be injected here by JavaScript -->
             <div id="infographic-data"></div>
         </div>
+        
+        <!-- Career Plan Button -->
+        <div class="text-center mt-10">
+             <button id="open-career-plan-modal" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 text-lg">
+                ✨ Create My Career Plan
+            </button>
+        </div>
 
         <!-- Footer Section -->
         <div class="text-center mt-10 border-t pt-6">
@@ -67,6 +74,42 @@
             </div>
         </div>
     </div>
+    
+    <!-- Modal for Career Plan -->
+    <div id="career-plan-modal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div class="modal-content bg-white rounded-lg shadow-xl w-full max-w-2xl p-6 relative transform scale-95">
+            <button id="close-career-plan-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Your Personalized Career Plan</h2>
+            <div id="career-plan-body" class="text-gray-600 space-y-4 max-h-[70vh] overflow-y-auto">
+                <div id="career-plan-form">
+                    <div class="mb-4">
+                        <label for="interests" class="block text-gray-700 font-semibold mb-2">My Interests</label>
+                        <textarea id="interests" rows="3" class="w-full p-2 border border-gray-300 rounded-md" placeholder="e.g., helping people, technology, creative arts, working outdoors"></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label for="skills" class="block text-gray-700 font-semibold mb-2">My Skills</label>
+                        <textarea id="skills" rows="3" class="w-full p-2 border border-gray-300 rounded-md" placeholder="e.g., communication, problem-solving, specific software, physical trades"></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label for="goals" class="block text-gray-700 font-semibold mb-2">My Career Goals</label>
+                        <textarea id="goals" rows="3" class="w-full p-2 border border-gray-300 rounded-md" placeholder="e.g., find a stable job, start my own business, get a promotion, learn a new trade"></textarea>
+                    </div>
+                    <button id="generate-plan-btn" class="w-full bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 text-lg">
+                        ✨ Generate Plan
+                    </button>
+                </div>
+                 <!-- Loading spinner -->
+                <div id="career-plan-loader" class="hidden flex justify-center items-center h-40">
+                    <div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-teal-500"></div>
+                </div>
+                <!-- API Response -->
+                <div id="career-plan-response" class="hidden"></div>
+            </div>
+        </div>
+    </div>
+
 
     <script>
         // A single, complete data source for all sectors
@@ -149,61 +192,80 @@
             container.innerHTML += itemHTML;
         });
 
+        // --- IMPORTANT ---
+        // The API key is missing when you run this on GitHub.
+        // 1. Get your free API key from Google AI Studio.
+        // 2. Paste it here to make the buttons work on your live site.
+        const apiKey = "PASTE_YOUR_API_KEY_HERE"; 
+
         // Modal Handling
-        const modal = document.getElementById('insights-modal');
+        const insightsModal = document.getElementById('insights-modal');
         const closeModalBtn = document.getElementById('close-modal');
         const modalTitle = document.getElementById('modal-title');
         const loader = document.getElementById('loader');
         const apiResponseEl = document.getElementById('api-response');
 
-        function showModal() {
-            modal.classList.remove('hidden');
+        function showInsightsModal() {
+            insightsModal.classList.remove('hidden');
             setTimeout(() => {
-                modal.classList.add('opacity-100');
-                modal.querySelector('.modal-content').classList.remove('scale-95');
+                insightsModal.classList.add('opacity-100');
+                insightsModal.querySelector('.modal-content').classList.remove('scale-95');
             }, 10);
         }
 
-        function hideModal() {
-            modal.classList.remove('opacity-100');
-            modal.querySelector('.modal-content').classList.add('scale-95');
+        function hideInsightsModal() {
+            insightsModal.classList.remove('opacity-100');
+            insightsModal.querySelector('.modal-content').classList.add('scale-95');
             setTimeout(() => {
-                modal.classList.add('hidden');
+                insightsModal.classList.add('hidden');
             }, 250);
         }
 
-        closeModalBtn.addEventListener('click', hideModal);
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                hideModal();
+        closeModalBtn.addEventListener('click', hideInsightsModal);
+        insightsModal.addEventListener('click', (e) => {
+            if (e.target === insightsModal) {
+                hideInsightsModal();
+            }
+        });
+        
+        // Career Plan Modal Handling
+        const careerPlanModal = document.getElementById('career-plan-modal');
+        const openCareerPlanBtn = document.getElementById('open-career-plan-modal');
+        const closeCareerPlanBtn = document.getElementById('close-career-plan-modal');
+        const generatePlanBtn = document.getElementById('generate-plan-btn');
+        const careerPlanLoader = document.getElementById('career-plan-loader');
+        const careerPlanResponseEl = document.getElementById('career-plan-response');
+        const careerPlanForm = document.getElementById('career-plan-form');
+
+        function showCareerPlanModal() {
+            careerPlanModal.classList.remove('hidden');
+            setTimeout(() => {
+                careerPlanModal.classList.add('opacity-100');
+                careerPlanModal.querySelector('.modal-content').classList.remove('scale-95');
+            }, 10);
+        }
+
+        function hideCareerPlanModal() {
+            careerPlanModal.classList.remove('opacity-100');
+            careerPlanModal.querySelector('.modal-content').classList.add('scale-95');
+            setTimeout(() => {
+                careerPlanModal.classList.add('hidden');
+            }, 250);
+        }
+
+        openCareerPlanBtn.addEventListener('click', showCareerPlanModal);
+        closeCareerPlanBtn.addEventListener('click', hideCareerPlanModal);
+        careerPlanModal.addEventListener('click', (e) => {
+            if (e.target === careerPlanModal) {
+                hideCareerPlanModal();
             }
         });
 
-        // Gemini API call
-        async function getCareerInsights(sectorName, subSectors) {
-            modalTitle.textContent = `Career Insights: ${sectorName}`;
-            apiResponseEl.classList.add('hidden');
-            loader.classList.remove('hidden');
-            showModal();
 
-            let prompt;
-            if (subSectors) {
-                prompt = `For the following collection of sectors: ${subSectors}, provide a general overview of the types of roles available. Then, briefly describe common required skills and the general career outlook. Keep the tone encouraging and informative. Format the response using HTML paragraphs.`;
-            } else {
-                prompt = `Provide a brief, encouraging, and informative overview of career paths, key skills, and the future outlook for the '${sectorName}' sector. Structure the response with clear HTML H3 headings for "Career Paths", "Key Skills", and "Future Outlook", and use HTML paragraphs for the text.`;
-            }
-            
-            // --- IMPORTANT ---
-            // The API key is missing when you run this on GitHub.
-            // 1. Get your free API key from Google AI Studio.
-            // 2. Paste it here to make the buttons work on your live site.
-            const apiKey = "AIzaSyDeVkSsGRVLU3BmSmA_rUqv6drN1u-V0Vs"; 
-            
-            if (apiKey === "AIzaSyDeVkSsGRVLU3BmSmA_rUqv6drN1u-V0Vs" || !apiKey) {
-                 apiResponseEl.innerHTML = `<p class="text-red-500">API Key is missing. Please follow the instructions to add your API key to the code.</p>`;
-                 loader.classList.add('hidden');
-                 apiResponseEl.classList.remove('hidden');
-                 return;
+        // Generic API Call Function
+        async function callGemini(prompt) {
+             if (apiKey === "AIzaSyDeVkSsGRVLU3BmSmA_rUqv6drN1u-V0Vs" || !apiKey) {
+                 return `<p class="text-red-500">API Key is missing. Please follow the instructions to add your API key to the code.</p>`;
             }
 
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
@@ -223,20 +285,72 @@
                 const result = await response.json();
                 
                 if (result.candidates && result.candidates.length > 0 && result.candidates[0].content.parts.length > 0) {
-                    const text = result.candidates[0].content.parts[0].text;
-                    apiResponseEl.innerHTML = text;
+                    return result.candidates[0].content.parts[0].text;
                 } else {
                      throw new Error("No content received from API.");
                 }
 
             } catch (error) {
-                console.error("Error fetching career insights:", error);
-                apiResponseEl.innerHTML = `<p class="text-red-500">Sorry, we couldn't fetch the insights at the moment. Please try again later.</p>`;
-            } finally {
-                loader.classList.add('hidden');
-                apiResponseEl.classList.remove('hidden');
+                console.error("Error calling Gemini API:", error);
+                return `<p class="text-red-500">Sorry, we couldn't fetch a response at the moment. Please try again later.</p>`;
             }
         }
+
+
+        // Function for Sector Insights
+        async function getCareerInsights(sectorName, subSectors) {
+            modalTitle.textContent = `Career Insights: ${sectorName}`;
+            apiResponseEl.classList.add('hidden');
+            loader.classList.remove('hidden');
+            showInsightsModal();
+
+            let prompt;
+            if (subSectors) {
+                prompt = `For the following collection of sectors: ${subSectors}, provide a general overview of the types of roles available. Then, briefly describe common required skills and the general career outlook. Keep the tone encouraging and informative. Format the response using HTML paragraphs.`;
+            } else {
+                prompt = `Provide a brief, encouraging, and informative overview of career paths, key skills, and the future outlook for the '${sectorName}' sector. Structure the response with clear HTML H3 headings for "Career Paths", "Key Skills", and "Future Outlook", and use HTML paragraphs for the text.`;
+            }
+            
+            const htmlResponse = await callGemini(prompt);
+            apiResponseEl.innerHTML = htmlResponse;
+            loader.classList.add('hidden');
+            apiResponseEl.classList.remove('hidden');
+        }
+        
+        // Function for Career Plan
+        async function generateCareerPlan() {
+            careerPlanForm.classList.add('hidden');
+            careerPlanResponseEl.classList.add('hidden');
+            careerPlanLoader.classList.remove('hidden');
+
+            const interests = document.getElementById('interests').value;
+            const skills = document.getElementById('skills').value;
+            const goals = document.getElementById('goals').value;
+
+            const prompt = `
+                Act as an expert career counselor. Based on the following user profile, create a personalized, actionable career plan.
+
+                **User Profile:**
+                - **Interests:** ${interests}
+                - **Current Skills:** ${skills}
+                - **Career Goals:** ${goals}
+
+                **Your Task:**
+                Generate a step-by-step career plan. The plan should:
+                1.  **Analyze the Profile:** Briefly summarize the user's profile and strengths.
+                2.  **Suggest Career Paths:** Recommend 2-3 specific job roles or sectors that align with their profile. Refer to sectors from the infographic where relevant (e.g., Hospitality, Healthcare, Retail, etc.).
+                3.  **Create Actionable Steps:** Provide a clear, step-by-step plan. Include suggestions for training/education, networking, resume/portfolio building, and job searching.
+                4.  **Maintain an Encouraging Tone:** Be positive, motivational, and supportive.
+
+                Format the entire response using HTML with H3 headings for each section and paragraphs for the text.
+            `;
+            
+            const htmlResponse = await callGemini(prompt);
+            careerPlanResponseEl.innerHTML = htmlResponse;
+            careerPlanLoader.classList.add('hidden');
+            careerPlanResponseEl.classList.remove('hidden');
+        }
+
 
         container.addEventListener('click', (e) => {
             const button = e.target.closest('.get-insights-btn');
@@ -246,6 +360,8 @@
                 getCareerInsights(sectorName, subSectors);
             }
         });
+        
+        generatePlanBtn.addEventListener('click', generateCareerPlan);
 
     </script>
 </body>
