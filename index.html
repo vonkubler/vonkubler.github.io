@@ -271,7 +271,27 @@
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
             try {
-                const payload = { contents: [{ parts: [{ text: prompt }] }] };
+                const payload = { 
+                    contents: [{ parts: [{ text: prompt }] }],
+                    safetySettings: [
+                        {
+                            category: "HARM_CATEGORY_HARASSMENT",
+                            threshold: "BLOCK_NONE"
+                        },
+                        {
+                            category: "HARM_CATEGORY_HATE_SPEECH",
+                            threshold: "BLOCK_NONE"
+                        },
+                        {
+                            category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                            threshold: "BLOCK_NONE"
+                        },
+                        {
+                            category: "HARM_CATEGORY_DANGEROUS_CONTENT",
+                            threshold: "BLOCK_NONE"
+                        }
+                    ]
+                };
                 const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -279,6 +299,8 @@
                 });
 
                 if (!response.ok) {
+                    const errorBody = await response.text();
+                    console.error("API Error Response:", errorBody);
                     throw new Error(`API request failed with status ${response.status}`);
                 }
 
@@ -330,7 +352,7 @@
             const goals = document.getElementById('goals').value;
 
             const prompt = `
-                Act as an expert career counselor. Based on the following user profile, create a personalised, actionable career plan.
+                Act as an expert career counselor. Based on the following user profile, create a personalized, actionable career plan.
 
                 **User Profile:**
                 - **Interests:** ${interests}
