@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Guide to British Values</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Authority -->
+    <!-- Application Structure Plan: The SPA uses a thematic, single-page layout. A sticky top navigation allows users to jump to any of the four core value sections. Each value is presented in an interactive card format where users click to reveal examples and discussion points. This structure was chosen to make the conceptual information digestible and engaging for entry-level learners, allowing them to control the pace of information discovery. A final 'Test Your Knowledge' section uses a similar interactive reveal to reinforce learning. This is more user-friendly than a static document, promoting active exploration over passive reading. -->
+    <!-- Visualization & Content Choices: Report Info: The four British Values, their definitions, examples, and discussion points. Goal: To inform and engage learners. Viz/Presentation Method: Structured HTML/CSS cards with Unicode icons (🗳️, ⚖️, 🕊️, 🤝) for quick visual association. Interaction: Core interaction is click-to-reveal content panes for examples and discussion points, powered by vanilla JavaScript. This avoids overwhelming the user. The quiz section also uses a click-to-reveal for answers, promoting self-assessment. Justification: This approach turns a static text document into an interactive learning tool without needing complex libraries, which is appropriate for the non-quantitative nature of the content. Library/Method: Vanilla JS for interactions, Tailwind CSS for styling. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .content-pane {
+            transition: all 0.3s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+        .content-pane.open {
+            max-height: 500px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .nav-link.active {
+            color: #2563eb;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-gray-800">
+
+    <header class="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold text-blue-700">British Values</h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#democracy" class="nav-link text-gray-600 hover:text-blue-600 transition-colors">Democracy</a>
+                <a href="#rule-of-law" class="nav-link text-gray-600 hover:text-blue-600 transition-colors">Rule of Law</a>
+                <a href="#liberty" class="nav-link text-gray-600 hover:text-blue-600 transition-colors">Individual Liberty</a>
+                <a href="#respect" class="nav-link text-gray-600 hover:text-blue-600 transition-colors">Mutual Respect</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <a href="#democracy" class="block py-2 px-6 text-gray-600 hover:bg-slate-100">Democracy</a>
+            <a href="#rule-of-law" class="block py-2 px-6 text-gray-600 hover:bg-slate-100">Rule of Law</a>
+            <a href="#liberty" class="block py-2 px-6 text-gray-600 hover:bg-slate-100">Individual Liberty</a>
+            <a href="#respect" class="block py-2 px-6 text-gray-600 hover:bg-slate-100">Mutual Respect</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-8 md:py-12">
+
+        <section class="text-center mb-12 md:mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Exploring British Values</h2>
+            <p class="max-w-3xl mx-auto text-gray-600">
+                Welcome! This guide explores the four fundamental British Values. These are the principles that help create a fair, safe, and respectful society in the UK. Click on the sections below to learn more about each value, see real-world examples, and consider some discussion points.
+            </p>
+        </section>
+
+        <div id="values-grid" class="space-y-12">
+            <section id="democracy" class="value-section">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="p-6 md:p-8">
+                        <h3 class="text-2xl font-bold mb-3 flex items-center"><span class="mr-3 text-3xl">🗳️</span> Democracy</h3>
+                        <p class="text-gray-600 mb-6">Democracy means that everyone has a say in how the country is run. We do this by voting for people to represent us and make decisions on our behalf.</p>
+                        <div class="flex space-x-4">
+                            <button data-target="democracy-examples" class="toggle-button bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400">Examples</button>
+                            <button data-target="democracy-discussion" class="toggle-button bg-slate-200 text-slate-800 font-semibold py-2 px-4 rounded-lg hover:bg-slate-300 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400">Discussion</button>
+                        </div>
+                    </div>
+                    <div id="democracy-examples" class="content-pane bg-slate-50 px-6 md:px-8">
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li><strong>Voting in Elections:</strong> Choosing your local councillor or Member of Parliament (MP).</li>
+                            <li><strong>Having a Voice:</strong> Contacting your MP or signing petitions to ask for change.</li>
+                            <li><strong>Classroom Voting:</strong> A simple example is a class voting on which game to play.</li>
+                        </ul>
+                    </div>
+                    <div id="democracy-discussion" class="content-pane bg-slate-50 px-6 md:px-8">
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Why is it important for everyone to have a say?</li>
+                            <li>What happens if people don't vote?</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="rule-of-law" class="value-section">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="p-6 md:p-8">
+                        <h3 class="text-2xl font-bold mb-3 flex items-center"><span class="mr-3 text-3xl">⚖️</span> The Rule of Law</h3>
+                        <p class="text-gray-600 mb-6">The Rule of Law means that everyone must follow the law, and no one is above it. Laws keep us safe and ensure society is fair.</p>
+                        <div class="flex space-x-4">
+                            <button data-target="law-examples" class="toggle-button bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400">Examples</button>
+                            <button data-target="law-discussion" class="toggle-button bg-slate-200 text-slate-800 font-semibold py-2 px-4 rounded-lg hover:bg-slate-300 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400">Discussion</button>
+                        </div>
+                    </div>
+                    <div id="law-examples" class="content-pane bg-slate-50 px-6 md:px-8">
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li><strong>Traffic Laws:</strong> Everyone must stop at a red light, regardless of who they are.</li>
+                            <li><strong>Police and Courts:</strong> The police enforce laws, and courts decide on guilt and punishment fairly.</li>
+                            <li><strong>Classroom Rules:</strong> A rule like "no running inside" applies to everyone to keep them safe.</li>
+                        </ul>
+                    </div>
+                    <div id="law-discussion" class="content-pane bg-slate-50 px-6 md:px-8">
+                         <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Why do we need laws? What would happen without them?</li>
+                            <li>Is it fair that everyone has to follow the same laws?</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="liberty" class="value-section">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="p-6 md:p-8">
+                        <h3 class="text-2xl font-bold mb-3 flex items-center"><span class="mr-3 text-3xl">🕊️</span> Individual Liberty</h3>
+                        <p class="text-gray-600 mb-6">Individual Liberty means you have the freedom to make your own choices and live your life how you want, as long as you respect the law and the rights of others.</p>
+                        <div class="flex space-x-4">
+                            <button data-target="liberty-examples" class="toggle-button bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400">Examples</button>
+                            <button data-target="liberty-discussion" class="toggle-button bg-slate-200 text-slate-800 font-semibold py-2 px-4 rounded-lg hover:bg-slate-300 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400">Discussion</button>
+                        </div>
+                    </div>
+                    <div id="liberty-examples" class="content-pane bg-slate-50 px-6 md:px-8">
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li><strong>Freedom of Speech:</strong> You can say what you think, as long as it's not hateful or illegal.</li>
+                            <li><strong>Freedom of Religion:</strong> You can choose to follow any religion, or no religion at all.</li>
+                            <li><strong>Personal Choices:</strong> You are free to choose your career, where you live, and what you wear.</li>
+                        </ul>
+                    </div>
+                    <div id="liberty-discussion" class="content-pane bg-slate-50 px-6 md:px-8">
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>What does "freedom" mean to you?</li>
+                            <li>Are there any limits to our freedom? Why?</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="respect" class="value-section">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="p-6 md:p-8">
+                        <h3 class="text-2xl font-bold mb-3 flex items-center"><span class="mr-3 text-3xl">🤝</span> Mutual Respect & Tolerance</h3>
+                        <p class="text-gray-600 mb-6">This means treating others as you wish to be treated and accepting that people have different faiths, beliefs, and ways of life. You don't have to agree, but you accept their right to be different.</p>
+                        <div class="flex space-x-4">
+                            <button data-target="respect-examples" class="toggle-button bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400">Examples</button>
+                            <button data-target="respect-discussion" class="toggle-button bg-slate-200 text-slate-800 font-semibold py-2 px-4 rounded-lg hover:bg-slate-300 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400">Discussion</button>
+                        </div>
+                    </div>
+                    <div id="respect-examples" class="content-pane bg-slate-50 px-6 md:px-8">
+                         <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li><strong>Celebrating Festivals:</strong> People in the UK celebrate Christmas, Eid, Diwali, Hanukkah, and more.</li>
+                            <li><strong>Treating Everyone Fairly:</strong> People from all backgrounds should be treated with kindness.</li>
+                            <li><strong>Respecting Hobbies:</strong> Accepting that a friend likes a different sport or activity than you do.</li>
+                        </ul>
+                    </div>
+                    <div id="respect-discussion" class="content-pane bg-slate-50 px-6 md:px-8">
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Why is it important to respect people who are different from us?</li>
+                            <li>How can we show respect to others in our daily lives?</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section id="quiz" class="mt-16 md:mt-24">
+            <h2 class="text-3xl font-bold text-center mb-8">Test Your Knowledge</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <p class="font-semibold mb-3">Question 1: The 'Rule of Law' means that the laws of the country apply to...</p>
+                    <button data-target="q1-answer" class="toggle-button text-sm bg-blue-100 text-blue-800 font-semibold py-1 px-3 rounded-full hover:bg-blue-200 transition-colors">Reveal Answer</button>
+                    <div id="q1-answer" class="content-pane px-0">
+                        <p class="text-green-700 font-bold">Answer: Everyone, with no exceptions.</p>
+                        <p class="text-sm text-gray-600">This is the core principle – no one is above the law.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <p class="font-semibold mb-3">Question 2: Celebrating different cultural festivals is an example of which value?</p>
+                    <button data-target="q2-answer" class="toggle-button text-sm bg-blue-100 text-blue-800 font-semibold py-1 px-3 rounded-full hover:bg-blue-200 transition-colors">Reveal Answer</button>
+                    <div id="q2-answer" class="content-pane px-0">
+                        <p class="text-green-700 font-bold">Answer: Mutual Respect and Tolerance.</p>
+                        <p class="text-sm text-gray-600">It shows acceptance and respect for different faiths and beliefs.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <p class="font-semibold mb-3">Question 3: Which of these is NOT one of the four main British Values?</p>
+                    <button data-target="q3-answer" class="toggle-button text-sm bg-blue-100 text-blue-800 font-semibold py-1 px-3 rounded-full hover:bg-blue-200 transition-colors">Reveal Answer</button>
+                    <div id="q3-answer" class="content-pane px-0">
+                        <p class="text-green-700 font-bold">Answer: Financial Success.</p>
+                        <p class="text-sm text-gray-600">While a personal goal for many, it's not a fundamental British Value.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <p class="font-semibold mb-3">Question 4: Signing a petition to influence the government is an act of...</p>
+                    <button data-target="q4-answer" class="toggle-button text-sm bg-blue-100 text-blue-800 font-semibold py-1 px-3 rounded-full hover:bg-blue-200 transition-colors">Reveal Answer</button>
+                    <div id="q4-answer" class="content-pane px-0">
+                        <p class="text-green-700 font-bold">Answer: Democracy.</p>
+                        <p class="text-sm text-gray-600">It's a way for citizens to have their voices heard and participate in the political process.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-white mt-12 md:mt-16">
+        <div class="container mx-auto px-6 py-4 text-center text-slate-400">
+            <p>&copy; 2025 Interactive Guide. For educational purposes.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggleButtons = document.querySelectorAll('.toggle-button');
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetId = button.getAttribute('data-target');
+                    const targetPane = document.getElementById(targetId);
+                    if (targetPane) {
+                        targetPane.classList.toggle('open');
+                    }
+                });
+            });
+
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            const navLinks = document.querySelectorAll('nav a');
+            const sections = document.querySelectorAll('.value-section');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        document.querySelectorAll('.nav-link').forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    if (mobileMenu.offsetParent !== null) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
