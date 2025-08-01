@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Development Guide for UK ESL Students</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 350px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+                max-height: 400px;
+            }
+        }
+        .flowchart-step {
+            border: 2px solid #665191;
+            background-color: #f0eef6;
+            color: #2F4B7C;
+        }
+        .flowchart-arrow {
+            color: #665191;
+        }
+    </style>
+</head>
+<body class="bg-gray-100" style="background-color: #e0e6f0;">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold mb-2" style="color: #003F5C;">Your Career Journey in the UK</h1>
+            <p class="text-lg md:text-xl" style="color: #2F4B7C;">An Infographic Guide for ESL Students</p>
+        </header>
+
+        <main class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <article class="md:col-span-2 bg-white rounded-lg shadow-lg p-6 flex flex-col md:flex-row items-center">
+                <div class="flex-1">
+                    <h2 class="text-3xl font-bold mb-3" style="color: #003F5C;">🌱 Step 1: Assess Yourself</h2>
+                    <p class="mb-4" style="color: #2F4B7C;">Before you start looking for a job, it's essential to understand yourself. This process involves looking at your skills from past experiences, your personal interests, and your long-term career goals. Balancing these three areas will help you find a job that is not only suitable but also fulfilling.</p>
+                    <p class="font-semibold" style="color: #003F5C;">The chart illustrates how skills, interests, and goals are all equal and vital parts of your self-assessment.</p>
+                </div>
+                <div class="w-full md:w-1/2 mt-6 md:mt-0 md:ml-6">
+                    <div class="chart-container">
+                        <canvas id="selfAssessmentChart"></canvas>
+                    </div>
+                </div>
+            </article>
+
+            <article class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-3xl font-bold mb-3" style="color: #003F5C;">🗣️ Step 2: Boost Your English</h2>
+                <p class="mb-4" style="color: #2F4B7C;">Strong English skills are critical for success in the UK workplace. This chart shows a path of progression. Start with general ESOL classes, then focus on specific workplace vocabulary, and finally, build confidence by joining conversation clubs. Each step builds upon the last, increasing your employability.</p>
+                <div class="chart-container h-80 md:h-96">
+                    <canvas id="englishSkillsChart"></canvas>
+                </div>
+            </article>
+            
+            <article class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-center items-center text-center">
+                <h2 class="text-3xl font-bold mb-3" style="color: #003F5C;">🔍 Step 3: Explore Career Options</h2>
+                <p class="mb-6" style="color: #2F4B7C;">Finding the right career path requires active research. Use official resources like the National Careers Service, browse popular job websites, and don't underestimate the power of networking.</p>
+                <div class="p-8 rounded-full w-64 h-64 flex flex-col justify-center items-center" style="background-color: #ff7c43;">
+                     <p class="text-white text-lg font-semibold mb-2">Up to</p>
+                    <p class="text-white font-bold text-7xl">70%</p>
+                    <p class="text-white text-lg font-semibold mt-2">of jobs are found via networking & online boards.</p>
+                </div>
+                <p class="mt-6" style="color: #2F4B7C;">This highlights the importance of looking beyond simple applications and actively engaging with your industry and community.</p>
+            </article>
+            
+            <article class="md:col-span-2 bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-3xl font-bold text-center mb-3" style="color: #003F5C;">🎓 Step 4: Gain Qualifications & Experience</h2>
+                <p class="mb-6 text-center" style="color: #2F4B7C;">UK employers value a combination of recognised qualifications and hands-on experience. This flowchart outlines the two main paths you can take: getting your existing qualifications recognised or gaining new ones through UK institutions, supplemented by practical experience like volunteering.</p>
+                <div class="flex flex-col items-center">
+                    <div class="flowchart-step p-4 rounded-lg font-semibold text-center w-3/4 md:w-1/2">Do you have qualifications from your home country?</div>
+                    <div class="flex w-full justify-around mt-4">
+                        <div class="text-5xl flowchart-arrow transform -rotate-45">⤵</div>
+                        <div class="text-5xl flowchart-arrow transform rotate-45">⤵</div>
+                    </div>
+                    <div class="flex flex-col md:flex-row w-full justify-around items-start">
+                        <div class="flex flex-col items-center p-4 w-full md:w-1/2">
+                            <h3 class="text-xl font-bold mb-2" style="color: #D45087;">YES</h3>
+                            <div class="flowchart-step p-4 rounded-lg font-semibold text-center w-full">Use ECCTIS (formerly UK NARIC) to compare them to UK standards.</div>
+                        </div>
+                        <div class="flex flex-col items-center p-4 w-full md:w-1/2">
+                            <h3 class="text-xl font-bold mb-2" style="color: #F95D6A;">NO / I need more</h3>
+                            <div class="flowchart-step p-4 rounded-lg font-semibold text-center w-full mb-4">Enroll in a Further Education (FE) College for UK qualifications.</div>
+                            <div class="text-3xl flowchart-arrow">⬇</div>
+                            <div class="flowchart-step p-4 rounded-lg font-semibold text-center w-full mt-4">Gain experience through Volunteering or Internships.</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-3xl font-bold mb-3" style="color: #003F5C;">📝 Step 5: Build Your CV & Cover Letter</h2>
+                <p class="mb-4" style="color: #2F4B7C;">A strong application is built from several key components. Your CV provides the facts of your experience, while the cover letter tells your story. Most importantly, tailoring your application to highlight skills relevant to the specific job is what makes it truly effective.</p>
+                <div class="chart-container h-80 md:h-96">
+                    <canvas id="applicationChart"></canvas>
+                </div>
+            </article>
+
+            <article class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-3xl font-bold mb-3" style="color: #003F5C;">💼 Step 6: Master the Interview</h2>
+                <p class="mb-4" style="color: #2F4B7C;">A successful interview requires balanced preparation across several areas. This chart shows the key pillars: researching the company, practicing your answers, preparing your own questions to ask, and ensuring your appearance is professional. Excelling in all areas gives you the best chance of success.</p>
+                <div class="chart-container h-80 md:h-96">
+                    <canvas id="interviewChart"></canvas>
+                </div>
+            </article>
+            
+        </main>
+
+        <footer class="text-center mt-12 py-6 border-t" style="border-color: #665191;">
+            <h3 class="text-2xl font-bold mb-4" style="color: #003F5C;">💡 Useful Resources</h3>
+            <div class="flex justify-center space-x-4 md:space-x-8">
+                <a href="https://nationalcareers.service.gov.uk" target="_blank" class="font-semibold" style="color: #D45087; hover:text-decoration: underline;">National Careers Service</a>
+                <a href="https://www.gov.uk/find-a-job" target="_blank" class="font-semibold" style="color: #F95D6A; hover:text-decoration: underline;">GOV.UK Find a Job</a>
+                <a href="https://volunteeringmatters.org.uk" target="_blank" class="font-semibold" style="color: #FF7C43; hover:text-decoration: underline;">Volunteering Matters</a>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        const brilliantBlues = {
+            blueDark: '#003F5C',
+            blueMid: '#2F4B7C',
+            purpleDark: '#665191',
+            purpleMid: '#A05195',
+            pinkDark: '#D45087',
+            pinkMid: '#F95D6A',
+            orange: '#FF7C43',
+            yellow: '#FFA600'
+        };
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const defaultChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: brilliantBlues.blueMid,
+                        font: {
+                            size: 14,
+                            family: 'Poppins'
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    },
+                    bodyFont: {
+                        size: 14,
+                        family: 'Poppins'
+                    },
+                    titleFont: {
+                        size: 16,
+                        family: 'Poppins'
+                    }
+                }
+            }
+        };
+
+        function wrapLabel(str, maxWidth) {
+            if (str.length <= maxWidth) {
+                return str;
+            }
+            const words = str.split(' ');
+            let lines = [];
+            let currentLine = words[0];
+            for (let i = 1; i < words.length; i++) {
+                if ((currentLine + ' ' + words[i]).length > maxWidth) {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                } else {
+                    currentLine += ' ' + words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        new Chart(document.getElementById('selfAssessmentChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Your Skills', 'Your Interests', 'Your Goals'],
+                datasets: [{
+                    label: 'Self Assessment Areas',
+                    data: [33.3, 33.3, 33.4],
+                    backgroundColor: [brilliantBlues.pinkMid, brilliantBlues.orange, brilliantBlues.yellow],
+                    borderColor: '#ffffff',
+                    borderWidth: 4
+                }]
+            },
+            options: { ...defaultChartOptions }
+        });
+
+        new Chart(document.getElementById('englishSkillsChart'), {
+            type: 'bar',
+            data: {
+                labels: ['General ESOL Classes', 'Workplace English', 'Conversation Clubs'],
+                datasets: [{
+                    label: 'Focus / Proficiency Level',
+                    data: [50, 75, 100],
+                    backgroundColor: [brilliantBlues.purpleMid, brilliantBlues.pinkDark, brilliantBlues.pinkMid],
+                    borderColor: brilliantBlues.purpleDark,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                ...defaultChartOptions,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        ticks: { color: brilliantBlues.blueMid },
+                        grid: { display: false }
+                    },
+                    y: {
+                        ticks: { color: brilliantBlues.blueMid }
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('applicationChart'), {
+            type: 'bar',
+            data: {
+                labels: ['A Strong Application'],
+                datasets: [
+                    {
+                        label: 'Well-structured CV',
+                        data: [40],
+                        backgroundColor: brilliantBlues.orange,
+                    },
+                    {
+                        label: 'Clear Cover Letter',
+                        data: [30],
+                        backgroundColor: brilliantBlues.yellow,
+                    },
+                    {
+                        label: 'Tailored, Relevant Skills',
+                        data: [30],
+                        backgroundColor: brilliantBlues.pinkMid,
+                    }
+                ]
+            },
+            options: {
+                ...defaultChartOptions,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        stacked: true,
+                        ticks: { color: brilliantBlues.blueMid },
+                        grid: { display: false }
+                    },
+                    y: {
+                        stacked: true,
+                        ticks: { color: brilliantBlues.blueMid }
+                    }
+                }
+            }
+        });
+
+        const interviewLabels = [
+            'Company Research', 
+            'Question Practice', 
+            'Professional Appearance', 
+            'Asking Questions',
+            'Understanding the Role'
+        ].map(label => wrapLabel(label, 16));
+
+        new Chart(document.getElementById('interviewChart'), {
+            type: 'radar',
+            data: {
+                labels: interviewLabels,
+                datasets: [{
+                    label: 'Preparation Level',
+                    data: [8, 9, 7, 6, 8],
+                    fill: true,
+                    backgroundColor: 'rgba(249, 93, 106, 0.2)',
+                    borderColor: brilliantBlues.pinkMid,
+                    pointBackgroundColor: brilliantBlues.pinkMid,
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: brilliantBlues.pinkMid
+                }]
+            },
+            options: {
+                ...defaultChartOptions,
+                scales: {
+                    r: {
+                        angleLines: { color: brilliantBlues.purpleMid },
+                        grid: { color: brilliantBlues.purpleMid },
+                        pointLabels: { 
+                            color: brilliantBlues.blueMid,
+                            font: { size: 12, family: 'Poppins' }
+                        },
+                        ticks: {
+                            color: brilliantBlues.blueMid,
+                            backdropColor: 'rgba(255, 255, 255, 0.75)'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
