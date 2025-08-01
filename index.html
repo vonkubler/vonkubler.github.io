@@ -96,6 +96,7 @@
                         <label for="goals" class="block text-gray-700 font-semibold mb-2">My Career Goals</label>
                         <textarea id="goals" rows="3" class="w-full p-2 border border-gray-300 rounded-md" placeholder="e.g., find a stable job, start my own business, get a promotion, learn a new trade"></textarea>
                     </div>
+                     <p id="form-error" class="text-red-500 text-sm mb-4 hidden">Please fill out all fields before generating a plan.</p>
                     <button id="generate-plan-btn" class="w-full bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 text-lg">
                         ✨ Generate Plan
                     </button>
@@ -230,6 +231,7 @@
         const careerPlanLoader = document.getElementById('career-plan-loader');
         const careerPlanResponseEl = document.getElementById('career-plan-response');
         const careerPlanForm = document.getElementById('career-plan-form');
+        const formError = document.getElementById('form-error');
 
         function showCareerPlanModal() {
             careerPlanModal.classList.remove('hidden');
@@ -261,7 +263,7 @@
             // The secret URL you got from your webhook provider (e.g., Make.com)
             const webhookURL = "https://hook.eu2.make.com/lbyn59tym8kxjdj5rrzpj7pa6uqwkjsa";
 
-            if (webhookURL === "https://hook.eu2.make.com/lbyn59tym8kxjdj5rrzpj7pa6uqwkjsa" || !webhookURL) {
+            if (webhookURL === "PASTE_YOUR_WEBHOOK_URL_HERE" || !webhookURL) {
                 return `<p class="text-red-500">Webhook URL is missing. Please paste your webhook URL into the code.</p>`;
             }
 
@@ -313,13 +315,19 @@
         
         // Function for Career Plan
         async function generateCareerPlan() {
+            const interests = document.getElementById('interests').value.trim();
+            const skills = document.getElementById('skills').value.trim();
+            const goals = document.getElementById('goals').value.trim();
+
+            if (!interests || !skills || !goals) {
+                formError.classList.remove('hidden');
+                return;
+            }
+            
+            formError.classList.add('hidden');
             careerPlanForm.classList.add('hidden');
             careerPlanResponseEl.classList.add('hidden');
             careerPlanLoader.classList.remove('hidden');
-
-            const interests = document.getElementById('interests').value;
-            const skills = document.getElementById('skills').value;
-            const goals = document.getElementById('goals').value;
 
             const prompt = `
                 Act as an expert career counselor. Based on the following user profile, create a personalized, actionable career plan.
