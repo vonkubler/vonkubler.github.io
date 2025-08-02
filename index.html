@@ -21,12 +21,13 @@
         .animate-grow {
             animation: grow 0.8s ease-out forwards;
         }
-        /* Styles for the modal */
-        .modal {
-            transition: opacity 0.25s ease;
+        .details-panel {
+            transition: all 0.3s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
         }
-        .modal-content {
-            transition: transform 0.25s ease;
+        .details-panel.show {
+            max-height: 500px; /* Adjust as needed */
         }
     </style>
 </head>
@@ -39,78 +40,15 @@
         </div>
 
         <!-- Infographic Content -->
-        <div class="space-y-6">
+        <div class="space-y-2" id="infographic-data">
             <!-- Data will be injected here by JavaScript -->
-            <div id="infographic-data"></div>
-        </div>
-        
-        <!-- Career Plan Button -->
-        <div class="text-center mt-10">
-             <button id="open-career-plan-modal" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 text-lg">
-                ✨ Create My Career Plan
-            </button>
         </div>
 
         <!-- Footer Section -->
         <div class="text-center mt-10 border-t pt-6">
-            <p class="text-sm text-gray-400">This infographic represents the distribution of participants across various employment sectors.</p>
+            <p class="text-sm text-gray-400">Click on any category to see more details.</p>
         </div>
     </div>
-
-    <!-- Modal for Career Insights -->
-    <div id="insights-modal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
-        <div class="modal-content bg-white rounded-lg shadow-xl w-full max-w-2xl p-6 relative transform scale-95">
-            <button id="close-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-            </button>
-            <h2 class="text-2xl font-bold text-gray-800 mb-4" id="modal-title">Career Insights</h2>
-            <div id="modal-body" class="text-gray-600 space-y-4 max-h-[70vh] overflow-y-auto">
-                <!-- Loading spinner -->
-                <div id="loader" class="flex justify-center items-center h-40">
-                    <div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-teal-500"></div>
-                </div>
-                <!-- API Response -->
-                <div id="api-response" class="hidden"></div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Modal for Career Plan -->
-    <div id="career-plan-modal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
-        <div class="modal-content bg-white rounded-lg shadow-xl w-full max-w-2xl p-6 relative transform scale-95">
-            <button id="close-career-plan-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-            </button>
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Your Personalized Career Plan</h2>
-            <div id="career-plan-body" class="text-gray-600 space-y-4 max-h-[70vh] overflow-y-auto">
-                <div id="career-plan-form">
-                    <div class="mb-4">
-                        <label for="interests" class="block text-gray-700 font-semibold mb-2">My Interests</label>
-                        <textarea id="interests" rows="3" class="w-full p-2 border border-gray-300 rounded-md" placeholder="e.g., helping people, technology, creative arts, working outdoors"></textarea>
-                    </div>
-                    <div class="mb-4">
-                        <label for="skills" class="block text-gray-700 font-semibold mb-2">My Skills</label>
-                        <textarea id="skills" rows="3" class="w-full p-2 border border-gray-300 rounded-md" placeholder="e.g., communication, problem-solving, specific software, physical trades"></textarea>
-                    </div>
-                    <div class="mb-4">
-                        <label for="goals" class="block text-gray-700 font-semibold mb-2">My Career Goals</label>
-                        <textarea id="goals" rows="3" class="w-full p-2 border border-gray-300 rounded-md" placeholder="e.g., find a stable job, start my own business, get a promotion, learn a new trade"></textarea>
-                    </div>
-                     <p id="form-error" class="text-red-500 text-sm mb-4 hidden">Please fill out all fields before generating a plan.</p>
-                    <button id="generate-plan-btn" class="w-full bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 text-lg">
-                        ✨ Generate Plan
-                    </button>
-                </div>
-                 <!-- Loading spinner -->
-                <div id="career-plan-loader" class="hidden flex justify-center items-center h-40">
-                    <div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-teal-500"></div>
-                </div>
-                <!-- API Response -->
-                <div id="career-plan-response" class="hidden"></div>
-            </div>
-        </div>
-    </div>
-
 
     <script>
         // A single, complete data source for all sectors
@@ -152,7 +90,7 @@
             icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>',
             color: 'bg-slate-400',
             isOther: true,
-            subSectors: otherSectors.map(s => s.name).join(', ')
+            subSectors: otherSectors.map(s => s.name)
         };
 
         // Combine the main sectors with the aggregated "other" group
@@ -161,15 +99,29 @@
 
         // Generate and inject the HTML for each data item
         displayData.forEach(sector => {
-            // This is the corrected, more stable layout for each row
+            const wrapper = document.createElement('div');
+            wrapper.className = 'py-2';
+
+            let detailsHTML = '';
+            if(sector.isOther) {
+                detailsHTML = `
+                    <p class="font-semibold mb-2">This category includes:</p>
+                    <ul class="list-disc list-inside text-gray-600">
+                        ${sector.subSectors.map(s => `<li>${s}</li>`).join('')}
+                    </ul>
+                `;
+            } else {
+                detailsHTML = `<p class="text-gray-600">This sector accounts for <strong>${sector.participants} participants</strong>, making up <strong>${sector.percentage}%</strong> of the total surveyed.</p>`;
+            }
+
             const itemHTML = `
-                <div class="flex items-center space-x-4 group">
+                <div class="category-row flex items-center space-x-4 group p-2 rounded-lg hover:bg-gray-50 cursor-pointer">
                     <!-- Icon -->
                     <div class="flex-shrink-0 w-12 h-12 rounded-full ${sector.color || 'bg-gray-400'} text-white flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
                         ${sector.icon || '<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" /></svg>'}
                     </div>
                     
-                    <!-- Main Content: Name and Bar (This part is changed for stability) -->
+                    <!-- Main Content: Name and Bar -->
                     <div class="flex-1 min-w-0">
                         <div class="flex justify-between items-baseline mb-1">
                             <p class="font-semibold text-gray-700 truncate pr-2">${sector.name}</p>
@@ -181,189 +133,24 @@
                              </div>
                         </div>
                     </div>
-
-                    <!-- Button -->
-                    <div class="flex-shrink-0">
-                        <button class="get-insights-btn bg-gray-200 hover:bg-teal-500 hover:text-white text-gray-600 font-bold py-2 px-3 rounded-lg transition-colors duration-300 text-sm" data-sector="${sector.name}" data-sub-sectors="${sector.subSectors || ''}">
-                            ✨ Insights
-                        </button>
-                    </div>
+                </div>
+                <div class="details-panel ml-16 p-4 bg-gray-50 rounded-lg border">
+                    ${detailsHTML}
                 </div>
             `;
-            container.innerHTML += itemHTML;
+            wrapper.innerHTML = itemHTML;
+            container.appendChild(wrapper);
         });
-
-        // Modal Handling
-        const insightsModal = document.getElementById('insights-modal');
-        const closeModalBtn = document.getElementById('close-modal');
-        const modalTitle = document.getElementById('modal-title');
-        const loader = document.getElementById('loader');
-        const apiResponseEl = document.getElementById('api-response');
-
-        function showInsightsModal() {
-            insightsModal.classList.remove('hidden');
-            setTimeout(() => {
-                insightsModal.classList.add('opacity-100');
-                insightsModal.querySelector('.modal-content').classList.remove('scale-95');
-            }, 10);
-        }
-
-        function hideInsightsModal() {
-            insightsModal.classList.remove('opacity-100');
-            insightsModal.querySelector('.modal-content').classList.add('scale-95');
-            setTimeout(() => {
-                insightsModal.classList.add('hidden');
-            }, 250);
-        }
-
-        closeModalBtn.addEventListener('click', hideInsightsModal);
-        insightsModal.addEventListener('click', (e) => {
-            if (e.target === insightsModal) {
-                hideInsightsModal();
-            }
-        });
-        
-        // Career Plan Modal Handling
-        const careerPlanModal = document.getElementById('career-plan-modal');
-        const openCareerPlanBtn = document.getElementById('open-career-plan-modal');
-        const closeCareerPlanBtn = document.getElementById('close-career-plan-modal');
-        const generatePlanBtn = document.getElementById('generate-plan-btn');
-        const careerPlanLoader = document.getElementById('career-plan-loader');
-        const careerPlanResponseEl = document.getElementById('career-plan-response');
-        const careerPlanForm = document.getElementById('career-plan-form');
-        const formError = document.getElementById('form-error');
-
-        function showCareerPlanModal() {
-            careerPlanModal.classList.remove('hidden');
-            setTimeout(() => {
-                careerPlanModal.classList.add('opacity-100');
-                careerPlanModal.querySelector('.modal-content').classList.remove('scale-95');
-            }, 10);
-        }
-
-        function hideCareerPlanModal() {
-            careerPlanModal.classList.remove('opacity-100');
-            careerPlanModal.querySelector('.modal-content').classList.add('scale-95');
-            setTimeout(() => {
-                careerPlanModal.classList.add('hidden');
-            }, 250);
-        }
-
-        openCareerPlanBtn.addEventListener('click', showCareerPlanModal);
-        closeCareerPlanBtn.addEventListener('click', hideCareerPlanModal);
-        careerPlanModal.addEventListener('click', (e) => {
-            if (e.target === careerPlanModal) {
-                hideCareerPlanModal();
-            }
-        });
-
-
-        // Generic API Call Function using a Webhook
-        async function callWebhook(prompt) {
-            // The secret URL you got from your webhook provider (e.g., Make.com)
-            const webhookURL = "https://hook.eu2.make.com/lbyn59tym8kxjdj5rrzpj7pa6uqwkjsa";
-
-            if (webhookURL === "https://hook.eu2.make.com/lbyn59tym8kxjdj5rrzpj7pa6uqwkjsa" || !webhookURL) {
-                return `<p class="text-red-500">Webhook URL is missing. Please paste your webhook URL into the code.</p>`;
-            }
-
-            try {
-                // We send the prompt to your webhook using a POST request.
-                // Your webhook will then securely call the Gemini API and return the result.
-                const response = await fetch(webhookURL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ prompt: prompt }) // Sending the prompt in a JSON object
-                });
-
-                if (!response.ok) {
-                    throw new Error(`Webhook request failed with status ${response.status}`);
-                }
-
-                // We expect the webhook to return the plain text/html response from Gemini
-                const textResponse = await response.text();
-                return textResponse;
-
-            } catch (error) {
-                console.error("Error calling webhook:", error);
-                return `<p class="text-red-500">Sorry, we couldn't get a response from the webhook. Please check the URL and your webhook setup.</p>`;
-            }
-        }
-
-
-        // Function for Sector Insights
-        async function getCareerInsights(sectorName, subSectors) {
-            modalTitle.textContent = `Career Insights: ${sectorName}`;
-            apiResponseEl.classList.add('hidden');
-            loader.classList.remove('hidden');
-            showInsightsModal();
-
-            let prompt;
-            if (subSectors) {
-                prompt = `For the following collection of sectors: ${subSectors}, provide a general overview of the types of roles available. Then, briefly describe common required skills and the general career outlook. Keep the tone encouraging and informative. Format the response using HTML paragraphs.`;
-            } else {
-                prompt = `Provide a brief, encouraging, and informative overview of career paths, key skills, and the future outlook for the '${sectorName}' sector. Structure the response with clear HTML H3 headings for "Career Paths", "Key Skills", and "Future Outlook", and use HTML paragraphs for the text.`;
-            }
-            
-            const htmlResponse = await callWebhook(prompt);
-            apiResponseEl.innerHTML = htmlResponse;
-            loader.classList.add('hidden');
-            apiResponseEl.classList.remove('hidden');
-        }
-        
-        // Function for Career Plan
-        async function generateCareerPlan() {
-            const interests = document.getElementById('interests').value.trim();
-            const skills = document.getElementById('skills').value.trim();
-            const goals = document.getElementById('goals').value.trim();
-
-            if (!interests || !skills || !goals) {
-                formError.classList.remove('hidden');
-                return;
-            }
-            
-            formError.classList.add('hidden');
-            careerPlanForm.classList.add('hidden');
-            careerPlanResponseEl.classList.add('hidden');
-            careerPlanLoader.classList.remove('hidden');
-
-            const prompt = `
-                Act as an expert career counselor. Based on the following user profile, create a personalized, actionable career plan.
-
-                **User Profile:**
-                - **Interests:** ${interests}
-                - **Current Skills:** ${skills}
-                - **Career Goals:** ${goals}
-
-                **Your Task:**
-                Generate a step-by-step career plan. The plan should:
-                1.  **Analyze the Profile:** Briefly summarize the user's profile and strengths.
-                2.  **Suggest Career Paths:** Recommend 2-3 specific job roles or sectors that align with their profile. Refer to sectors from the infographic where relevant (e.g., Hospitality, Healthcare, Retail, etc.).
-                3.  **Create Actionable Steps:** Provide a clear, step-by-step plan. Include suggestions for training/education, networking, resume/portfolio building, and job searching.
-                4.  **Maintain an Encouraging Tone:** Be positive, motivational, and supportive.
-
-                Format the entire response using HTML with H3 headings for each section and paragraphs for the text.
-            `;
-            
-            const htmlResponse = await callWebhook(prompt);
-            careerPlanResponseEl.innerHTML = htmlResponse;
-            careerPlanLoader.classList.add('hidden');
-            careerPlanResponseEl.classList.remove('hidden');
-        }
-
 
         container.addEventListener('click', (e) => {
-            const button = e.target.closest('.get-insights-btn');
-            if (button) {
-                const sectorName = button.dataset.sector;
-                const subSectors = button.dataset.subSectors;
-                getCareerInsights(sectorName, subSectors);
+            const row = e.target.closest('.category-row');
+            if (row) {
+                const detailsPanel = row.nextElementSibling;
+                if (detailsPanel && detailsPanel.classList.contains('details-panel')) {
+                    detailsPanel.classList.toggle('show');
+                }
             }
         });
-        
-        generatePlanBtn.addEventListener('click', generateCareerPlan);
 
     </script>
 </body>
