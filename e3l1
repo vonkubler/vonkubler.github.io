@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic: UK ESL Functional Skills & Gemini Integration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .chart-container { position: relative; height: 40vh; max-height: 400px; width: 100%; max-width: 500px; margin: auto; }
+        .stat-card { background-color: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-gray-800">ESL Skills Navigator</h1>
+            <div class="hidden md:flex space-x-4">
+                <a href="#overview" class="text-gray-600 hover:text-[#FF4E50]">Overview</a>
+                <a href="#progression" class="text-gray-600 hover:text-[#FF4E50]">Progression</a>
+                <a href="#prompts" class="text-gray-600 hover:text-[#FF4E50]">Prompts</a>
+                <a href="#workflow" class="text-gray-600 hover:text-[#FF4E50]">Workflow</a>
+                <a href="#detailed-examples" class="text-gray-600 hover:text-[#FF4E50]">Examples</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+        <section class="text-center py-12 px-6 bg-gradient-to-br from-[#FF4E50] to-[#FC913A] rounded-2xl shadow-xl text-white">
+            <h2 class="text-4xl md:text-5xl font-black uppercase tracking-wide">Empowering ESL Tutors & Learners</h2>
+            <p class="mt-4 text-lg max-w-3xl mx-auto">A visual guide to leveraging creative prompts and AI for Pearson Functional Skills English across Entry 3, Level 1, and Level 2.</p>
+        </section>
+
+        <section id="overview" class="mt-12">
+            <h3 class="text-3xl font-bold text-center mb-8">Curriculum at a Glance</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h4 class="text-xl font-bold mb-4 text-center">Core Skill Distribution</h4>
+                    <p class="text-center text-gray-600 mb-4">The curriculum maintains an equal focus across three fundamental pillars of language proficiency, ensuring well-rounded development for all learners.</p>
+                    <div class="chart-container">
+                        <canvas id="coreSkillsChart"></canvas>
+                    </div>
+                </div>
+                <div class="text-center md:text-left space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <p class="text-6xl font-extrabold text-[#FC913A]">3</p>
+                        <p class="text-xl font-semibold">Core Skill Levels</p>
+                        <p class="text-gray-600 mt-2">From foundational communication at Entry 3 to complex analysis at Level 2.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <p class="text-6xl font-extrabold text-[#F9D423]">9+</p>
+                        <p class="text-xl font-semibold">Creative Prompt Ideas</p>
+                        <p class="text-gray-600 mt-2">Engaging, real-world scenarios to build practical language skills.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="progression" class="mt-16">
+            <h3 class="text-3xl font-bold text-center mb-2">Skill Complexity Progression</h3>
+            <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">This chart illustrates the increasing demand in language complexity as learners advance from Entry 3 to Level 2. Each level builds upon the last, expanding the learner's ability to handle more sophisticated communication tasks.</p>
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <div class="chart-container" style="max-width: 600px;">
+                    <canvas id="progressionChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="prompts" class="mt-16">
+            <h3 class="text-3xl font-bold text-center mb-8">Creative Prompt Analysis</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h4 class="text-xl font-bold mb-2 text-center">Task Types by Category</h4>
+                    <p class="text-center text-gray-600 mb-4">The guide suggests a variety of task types, with a strong focus on practical, real-world writing and analytical activities that are crucial for functional English.</p>
+                    <div class="chart-container" style="height: 50vh; max-height: 450px;">
+                        <canvas id="promptTypesChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h4 class="text-xl font-bold mb-2 text-center">Evolution of Writing Tasks</h4>
+                    <p class="text-center text-gray-600 mb-4">Writing assignments evolve from simple, direct communication to structured, analytical reports, mirroring the learner's journey towards advanced proficiency.</p>
+                    <div class="chart-container" style="height: 50vh; max-height: 450px;">
+                        <canvas id="writingTasksChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="workflow" class="mt-16">
+            <h3 class="text-3xl font-bold text-center mb-2">The Modern Tutor's Workflow</h3>
+            <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">Integrating Gemini and Google Classroom creates an efficient, powerful cycle for generating and delivering customized learning content.</p>
+            <div class="bg-white p-8 rounded-xl shadow-lg">
+                <div class="flex flex-col md:flex-row justify-around items-center space-y-8 md:space-y-0 md:space-x-4">
+                    <div class="text-center flex flex-col items-center">
+                        <div class="bg-[#FF4E50] text-white rounded-full w-24 h-24 flex items-center justify-center text-4xl font-bold shadow-lg">1</div>
+                        <h4 class="text-lg font-semibold mt-4">Craft Prompt</h4>
+                        <p class="text-gray-600 max-w-xs">Tutor designs a specific prompt for Gemini based on the learner's level and skill focus.</p>
+                    </div>
+                    <div class="text-5xl text-gray-300 hidden md:block">&rarr;</div>
+                    <div class="text-5xl text-gray-300 md:hidden">&darr;</div>
+                    <div class="text-center flex flex-col items-center">
+                        <div class="bg-[#FC913A] text-white rounded-full w-24 h-24 flex items-center justify-center text-4xl font-bold shadow-lg">2</div>
+                        <h4 class="text-lg font-semibold mt-4">Generate Resource</h4>
+                        <p class="text-gray-600 max-w-xs">Gemini generates a tailored resource, such as a script, article, or writing task.</p>
+                    </div>
+                    <div class="text-5xl text-gray-300 hidden md:block">&rarr;</div>
+                    <div class="text-5xl text-gray-300 md:hidden">&darr;</div>
+                    <div class="text-center flex flex-col items-center">
+                        <div class="bg-[#F9D423] text-white rounded-full w-24 h-24 flex items-center justify-center text-4xl font-bold shadow-lg">3</div>
+                        <h4 class="text-lg font-semibold mt-4">Implement in Classroom</h4>
+                        <p class="text-gray-600 max-w-xs">Tutor deploys the resource as an assignment or activity in Google Classroom for learners.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="detailed-examples" class="mt-16">
+            <h3 class="text-3xl font-bold text-center mb-8">Detailed Prompt Examples for Tutors</h3>
+
+            <!-- Entry 3 Examples -->
+            <div class="bg-white p-6 rounded-xl shadow-lg mb-12">
+                <h4 class="text-2xl font-bold text-[#FF4E50] mb-6">🎯 Entry 3 Functional Skills: Practical Examples</h4>
+                <p class="text-gray-700 mb-6">At Entry 3, learners are building confidence in understanding and communicating straightforward information. The focus is on practical, everyday situations.</p>
+
+                <div class="mb-8">
+                    <h5 class="text-xl font-semibold text-gray-800 mb-2">🗣️ Speaking, Listening & Communicating: Giving Simple Instructions</h5>
+                    <p class="text-gray-600 mb-4">**Creative Prompt Idea:** "Explain how to use a simple household appliance (e.g., a kettle or microwave) to a new user."</p>
+                    <p class="text-gray-600 mb-4">**Gemini Prompt Example:** "Generate a simple, step-by-step script for an Entry 3 ESL learner to explain how to make a cup of tea using a kettle. Use clear, short sentences and imperative verbs. Include steps like 'Fill the kettle,' 'Plug it in,' 'Press the button.' Provide simple vocabulary."</p>
+                    <p class="text-gray-600 mb-4">**Gemini Output Example:**</p>
+                    <div class="bg-gray-50 p-4 rounded-md border border-gray-200 text-sm">
+                        <p class="font-bold">How to Make Tea:</p>
+                        <ol class="list-decimal list-inside">
+                            <li>Fill the kettle with water.</li>
+                            <li>Put the kettle on the base.</li>
+                            <li>Plug in the kettle.</li>
+                            <li>Press the button to boil.</li>
+                            <li>Put a tea bag in your cup.</li>
+                            <li>Pour hot water into the cup.</li>
+                            <li>Add milk and sugar (optional).</li>
+                            <li>Stir your tea.</li>
+                        </ol>
+                    </div>
+                    <p class="text-gray-600 mt-4">**How to Use in Google Classroom:** Create an assignment titled "How to Make Tea (Video/Audio)." Students can record themselves giving these instructions and upload the video or audio file. You can then provide feedback on clarity and pronunciation. Encourage peer feedback too!</p>
+                </div>
+
+                <div class="mb-8">
+                    <h5 class="text-xl font-semibold text-gray-800 mb-2">📖 Reading: Understanding a Simple Public Notice</h5>
+                    <p class="text-gray-600 mb-4">**Creative Prompt Idea:** "Read a 'Lost Pet' poster and identify key information to help find the pet."</p>
+                    <p class="text-gray-600 mb-4">**Gemini Prompt Example:** "Create a 'Lost Cat' poster for Entry 3 ESL learners. Include the cat's name, color, last seen location, a contact number, and a reward. Then, generate 3 multiple-choice questions about the poster, like 'What color is the cat?' or 'What is the phone number?'"</p>
+                    <p class="text-gray-600 mb-4">**Gemini Output Example:**</p>
+                    <div class="bg-gray-50 p-4 rounded-md border border-gray-200 text-sm">
+                        <p class="font-bold text-center text-lg">LOST CAT!</p>
+                        <p class="text-center mb-2">Name: Whiskers</p>
+                        <p>Colour: Black and White</p>
+                        <p>Last seen: Park Road, Tuesday morning</p>
+                        <p>Friendly but shy.</p>
+                        <p>Please call: 07123 456789</p>
+                        <p class="font-bold">Reward for safe return!</p>
+                        <br>
+                        <p class="font-bold">Questions:</p>
+                        <ol class="list-decimal list-inside">
+                            <li>What is the cat's name? (a) Socks (b) Whiskers (c) Fluffy</li>
+                            <li>Where was the cat last seen? (a) High Street (b) Park Road (c) My Garden</li>
+                            <li>What is the phone number to call? (a) 07123 456789 (b) 07987 654321 (c) 07000 112233</li>
+                        </ol>
+                    </div>
+                    <p class="text-gray-600 mt-4">**How to Use in Google Classroom:** Post the poster and questions as a Google Forms quiz. This allows for automatic grading and quick feedback on their reading comprehension. You can also print it for in-class work.</p>
+                </div>
+
+                <div>
+                    <h5 class="text-xl font-semibold text-gray-800 mb-2">✍️ Writing: Completing a Simple Form</h5>
+                    <p class="text-gray-600 mb-4">**Creative Prompt Idea:** "Fill out a basic registration form for a local club."</p>
+                    <p class="text-gray-600 mb-4">**Gemini Prompt Example:** "Design a simple 'Community Centre Membership Form' for Entry 3 ESL learners. Include fields for 'First Name,' 'Surname,' 'Address,' 'Phone Number,' 'Email,' and 'Date of Birth.' Add a clear instruction: 'Please write your details clearly.'"</p>
+                    <p class="text-gray-600 mb-4">**Gemini Output Example:**</p>
+                    <div class="bg-gray-50 p-4 rounded-md border border-gray-200 text-sm">
+                        <p class="font-bold text-center text-lg">Community Centre Membership Form</p>
+                        <p class="mb-2">Please write your details clearly.</p>
+                        <p>First Name: _________________________</p>
+                        <p>Surname: __________________________</p>
+                        <p>Address: ___________________________</p>
+                        <p>Phone Number: _____________________</p>
+                        <p>Email: ____________________________</p>
+                        <p>Date of Birth: _____ / _____ / ________</p>
+                    </div>
+                    <p class="text-gray-600 mt-4">**How to Use in Google Classroom:** Create a Google Docs assignment with the form. Students can type their answers directly. This helps them practice providing personal information accurately, a key functional skill.</p>
+                </div>
+            </div>
+
+            <!-- Level 1 Examples -->
+            <div class="bg-white p-6 rounded-xl shadow-lg mb-12">
+                <h4 class="text-2xl font-bold text-[#FC913A] mb-6">🚀 Level 1 Functional Skills: Practical Examples</h4>
+                <p class="text-gray-700 mb-6">At Level 1, learners are expected to understand main points and supporting details, participate in discussions, and write structured texts for a clear purpose.</p>
+
+                <div class="mb-8">
+                    <h5 class="text-xl font-semibold text-gray-800 mb-2">🗣️ Speaking, Listening & Communicating: Participating in a Group Discussion</h5>
+                    <p class="text-gray-600 mb-4">**Creative Prompt Idea:** "Discuss the advantages and disadvantages of living in a city versus the countryside."</p>
+                    <p class="text-gray-600 mb-4">**Gemini Prompt Example:** "Generate 5 discussion questions for Level 1 ESL learners about the pros and cons of city vs. countryside living. Include prompts for expressing opinions, agreeing/disagreeing, and giving simple reasons. For example: 'What do you like about living in a city?', 'What are the problems with living in the countryside?', 'Do you agree that cities are better for jobs?'"</p>
+                    <p class="text-gray-600 mb-4">**Gemini Output Example:**</p>
+                    <div class="bg-gray-50 p-4 rounded-md border border-gray-200 text-sm">
+                        <p class="font-bold">Discussion Questions: City vs. Countryside</p>
+                        <ol class="list-decimal list-inside">
+                            <li>What are two good things about living in a city?</li>
+                            <li>What are two bad things about living in the countryside?</li>
+                            <li>Do you think city life is more exciting than country life? Why or why not?</li>
+                            <li>Some people say the countryside is better for families. Do you agree?</li>
+                            <li>Where would you prefer to live in the future, and why?</li>
+                        </ol>
+                    </div>
+                    <p class="text-gray-600 mt-4">**How to Use in Google Classroom:** Post these questions as a discussion topic. Students can prepare their answers, and then you can facilitate a live discussion in Google Meet. You can also assign students to record their responses and upload them.</p>
+                </div>
+
+                <div class="mb-8">
+                    <h5 class="text-xl font-semibold text-gray-800 mb-2">📖 Reading: Identifying Main Points from a Longer Text</h5>
+                    <p class="text-gray-600 mb-4">**Creative Prompt Idea:** "Read an online article about healthy habits and identify the main advice given."</p>
+                    <p class="text-gray-600 mb-4">**Gemini Prompt Example:** "Write a short article (around 250 words) for Level 1 ESL learners about 'Five Simple Ways to Stay Healthy.' Include clear headings for each point (e.g., 'Eat Well,' 'Exercise Regularly'). Then, create 4 questions asking learners to identify the main advice from each section and one question asking for the overall main idea of the article."</p>
+                    <p class="text-gray-600 mb-4">**Gemini Output Example:**</p>
+                    <div class="bg-gray-50 p-4 rounded-md border border-gray-200 text-sm">
+                        <p class="font-bold text-center text-lg">Five Simple Ways to Stay Healthy</p>
+                        <p class="mb-2">Staying healthy is important for everyone. Here are some easy tips:</p>
+                        <p class="font-bold">1. Eat Well</p>
+                        <p>Try to eat lots of fruits and vegetables every day. They give your body vitamins. Reduce sugary drinks and snacks. Drink plenty of water.</p>
+                        <p class="font-bold">2. Exercise Regularly</p>
+                        <p>Even a short walk can help. Try to do 30 minutes of activity most days. You can walk, cycle, or dance. Exercise makes your heart strong.</p>
+                        <p class="font-bold">3. Get Enough Sleep</p>
+                        <p>Most adults need 7-9 hours of sleep each night. Good sleep helps your body and mind rest and repair. Try to go to bed and wake up at the same time each day.</p>
+                        <p class="font-bold">4. Manage Stress</p>
+                        <p>Life can be busy. Find ways to relax. You could read a book, listen to music, or spend time with friends. Don't worry too much about small problems.</p>
+                        <p class="font-bold">5. Stay Connected</p>
+                        <p>Spend time with family and friends. Talk about your day. Being with people you like can make you feel happier and less stressed. Join a club or group.</p>
+                        <br>
+                        <p class="font-bold">Questions:</p>
+                        <ol class="list-decimal list-inside">
+                            <li>What is the main advice about eating well?</li>
+                            <li>How much exercise does the article suggest?</li>
+                            <li>Why is sleep important?</li>
+                            <li>What is one way to manage stress?</li>
+                            <li>What is the main idea of this article?</li>
+                        </ol>
+                    </div>
+                    <p class="text-gray-600 mt-4">**How to Use in Google Classroom:** Post the article and questions as a Google Docs assignment. Students can answer the questions, and you can provide feedback on their ability to identify main points and supporting details.</p>
+                </div>
+
+                <div>
+                    <h5 class="text-xl font-semibold text-gray-800 mb-2">✍️ Writing: Writing a Formal Email of Inquiry</h5>
+                    <p class="text-gray-600 mb-4">**Creative Prompt Idea:** "Write an email to a college asking about a course."</p>
+                    <p class="text-gray-600 mb-4">**Gemini Prompt Example:** "Design a Level 1 writing task: Learners write a formal email to a college admissions office. They want to ask about an 'ESOL Level 2' course. The email should ask about: start dates, fees, and entry requirements. Provide a simple template with 'Subject:', 'Dear Sir/Madam,' and 'Yours faithfully,' and a list of useful phrases like 'I am writing to inquire about...' and 'Could you please tell me...?'"</p>
+                    <p class="text-gray-600 mb-4">**Gemini Output Example:**</p>
+                    <div class="bg-gray-50 p-4 rounded-md border border-gray-200 text-sm">
+                        <p class="font-bold">Email Template: Course Inquiry</p>
+                        <p>Subject: Inquiry about ESOL Level 2 Course</p>
+                        <p>Dear Sir/Madam,</p>
+                        <p>I am writing to inquire about your ESOL Level 2 course.</p>
+                        <p>Could you please tell me the next start date for this course?</p>
+                        <p>Also, what are the fees for the course?</p>
+                        <p>Finally, what are the entry requirements for the ESOL Level 2 course?</p>
+                        <p>Thank you for your time.</p>
+                        <p>Yours faithfully,</p>
+                        <p>[Your Name]</p>
+                    </div>
+                    <p class="text-gray-600 mt-4">**How to Use in Google Classroom:** Create a Google Docs assignment with the template. Students can fill in the blanks and practice using formal language and structuring an inquiry email. You can give feedback on their grammar and formality.</p>
+                </div>
+            </div>
+
+            <!-- Level 2 Examples -->
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h4 class="text-2xl font-bold text-[#F9D423] mb-6">🌟 Level 2 Functional Skills: Practical Examples</h4>
+                <p class="text-gray-700 mb-6">At Level 2, learners are expected to analyze complex texts, contribute effectively to discussions, and write detailed, well-structured texts for diverse purposes and audiences.</p>
+
+                <div class="mb-8">
+                    <h5 class="text-xl font-semibold text-gray-800 mb-2">🗣️ Speaking, Listening & Communicating: Presenting an Argument</h5>
+                    <p class="text-gray-600 mb-4">**Creative Prompt Idea:** "Prepare and deliver a short presentation arguing for or against a local community initiative (e.g., a new park or a recycling scheme)."</p>
+                    <p class="text-gray-600 mb-4">**Gemini Prompt Example:** "Outline a Level 2 speaking and listening task: Learners prepare a 4-minute presentation arguing for the benefits of a new local recycling scheme. They should include at least three strong points with examples. Provide 3 challenging follow-up questions for a Q&A session, such as 'How will this scheme affect local businesses?' or 'What are the potential environmental drawbacks?'"</p>
+                    <p class="text-gray-600 mb-4">**Gemini Output Example:**</p>
+                    <div class="bg-gray-50 p-4 rounded-md border border-gray-200 text-sm">
+                        <p class="font-bold">Presentation Outline: Benefits of a New Recycling Scheme</p>
+                        <p class="mb-2">**Introduction:** Briefly introduce the new recycling scheme and its purpose.</p>
+                        <p class="font-bold">Point 1: Environmental Impact</p>
+                        <p>- Reduce landfill waste.</p>
+                        <p>- Save natural resources (e.g., trees for paper).</p>
+                        <p>- Example: Less plastic in oceans.</p>
+                        <p class="font-bold">Point 2: Economic Benefits</p>
+                        <p>- Create local jobs in recycling centers.</p>
+                        <p>- Potential for selling recycled materials.</p>
+                        <p>- Example: Other towns have earned money from recycling.</p>
+                        <p class="font-bold">Point 3: Community Engagement</p>
+                        <p>- Encourage community responsibility.</p>
+                        <p>- Make our area cleaner and greener.</p>
+                        <p>- Example: Local schools can get involved.</p>
+                        <p class="font-bold">Conclusion:</p>
+                        <p>Summarize benefits and call to action.</p>
+                        <br>
+                        <p class="font-bold">Possible Q&A Questions:</p>
+                        <ol class="list-decimal list-inside">
+                            <li>How will this new scheme be funded, and will it increase council tax?</li>
+                            <li>What measures will be in place to ensure residents participate effectively?</li>
+                            <li>Are there any potential negative impacts on local businesses or traffic?</li>
+                        </ol>
+                    </div>
+                    <p class="text-gray-600 mt-4">**How to Use in Google Classroom:** Students can prepare their presentations using Google Slides. They can record themselves delivering the presentation and upload it. You can then use the generated Q&A questions for a live discussion or as prompts for written responses.</p>
+                </div>
+
+                <div class="mb-8">
+                    <h5 class="text-xl font-semibold text-gray-800 mb-2">📖 Reading: Analyzing an Opinion Piece for Bias and Persuasion</h5>
+                    <p class="text-gray-600 mb-4">**Creative Prompt Idea:** "Read two different newspaper articles about a controversial topic and identify the author's bias."</p>
+                    <p class="text-gray-600 mb-4">**Gemini Prompt Example:** "Generate a short opinion piece (around 350 words) for Level 2 ESL learners. The piece should argue strongly *against* the use of single-use plastic bags, using persuasive language. Then, create 4 analytical questions that ask learners to identify: the author's main argument, two pieces of evidence used, two persuasive techniques (e.g., emotional language, statistics, rhetorical questions), and how the author tries to influence the reader."</p>
+                    <p class="text-gray-600 mb-4">**Gemini Output Example:**</p>
+                    <div class="bg-gray-50 p-4 rounded-md border border-gray-200 text-sm">
+                        <p class="font-bold text-center text-lg">The Plastic Pandemic: It's Time for Change</p>
+                        <p class="mb-2">Every time we leave a shop with a single-use plastic bag, we contribute to a global catastrophe. These flimsy bags, used for mere minutes, persist for hundreds of years, polluting our beautiful planet. Is this the legacy we want to leave for our children?</p>
+                        <p>Our oceans are choking. Marine life, from tiny fish to majestic whales, mistakes plastic fragments for food, leading to agonizing deaths. A recent study showed that over 8 million tons of plastic enter our oceans each year – a truly shocking figure. This isn't just an environmental problem; it's a moral crisis.</p>
+                        <p>Some argue that plastic bags are convenient. But at what cost? The convenience of a few minutes pales in comparison to the irreversible damage to our ecosystems. We have alternatives: reusable bags are cheap, durable, and readily available. Why do we cling to a habit that is destroying our world?</p>
+                        <p>It's time for decisive action. Governments must implement stricter bans, and we, as consumers, must reject single-use plastics. Let's choose a future where our beaches are pristine, our oceans are teeming with life, and our conscience is clear. The power to change is in our hands.</p>
+                        <br>
+                        <p class="font-bold">Questions:</p>
+                        <ol class="list-decimal list-inside">
+                            <li>What is the author's main argument against single-use plastic bags?</li>
+                            <li>Name two pieces of evidence or facts the author uses to support their argument.</li>
+                            <li>Find two examples of persuasive language or techniques the author uses (e.g., strong words, questions, appeals to emotion).</li>
+                            <li>How does the author try to make the reader feel about single-use plastic bags?</li>
+                        </ol>
+                    </div>
+                    <p class="text-gray-600 mt-4">**How to Use in Google Classroom:** Post the article and questions as a Google Docs assignment. Students can highlight or annotate the text to show their analysis. This activity helps them develop critical reading skills and understand persuasive writing.</p>
+                </div>
+
+                <div>
+                    <h5 class="text-xl font-semibold text-gray-800 mb-2">✍️ Writing: Drafting a Formal Report</h5>
+                    <p class="text-gray-600 mb-4">**Creative Prompt Idea:** "Write a report on the findings of a local survey about public transport satisfaction."</p>
+                    <p class="text-gray-600 mb-4">**Gemini Prompt Example:** "Develop a Level 2 writing task: Learners write a formal report for their local council based on a fictional survey about public transport satisfaction. Provide the following survey results: '55% satisfied with bus frequency, 30% dissatisfied with bus cleanliness, 70% want more evening services, 45% use trains weekly.' The report should include: 'Introduction,' 'Methodology (briefly),' 'Key Findings (using the data),' 'Recommendations,' and 'Conclusion.' Emphasize formal language and clear, logical structure."</p>
+                    <p class="text-gray-600 mb-4">**Gemini Output Example:**</p>
+                    <div class="bg-gray-50 p-4 rounded-md border border-gray-200 text-sm">
+                        <p class="font-bold text-center text-lg">Report: Public Transport Satisfaction Survey</p>
+                        <p class="font-bold">1. Introduction</p>
+                        <p>This report presents the findings of a recent survey conducted to assess public satisfaction with local transport services, specifically buses and trains. The aim is to identify areas of strength and areas requiring improvement.</p>
+                        <p class="font-bold">2. Methodology</p>
+                        <p>An online survey was distributed to residents over a two-week period in July 2025. A total of 200 responses were received and analyzed.</p>
+                        <p class="font-bold">3. Key Findings</p>
+                        <ul class="list-disc list-inside">
+                            <li>**Bus Frequency:** 55% of respondents expressed satisfaction with the current bus frequency.</li>
+                            <li>**Bus Cleanliness:** 30% of respondents reported dissatisfaction with the cleanliness of buses.</li>
+                            <li>**Evening Services:** A significant 70% of respondents indicated a desire for more evening bus and train services.</li>
+                            <li>**Train Usage:** 45% of respondents stated they use trains on a weekly basis.</li>
+                        </ul>
+                        <p class="font-bold">4. Recommendations</p>
+                        <p>Based on these findings, it is recommended that the council considers:</p>
+                        <ul class="list-disc list-inside">
+                            <li>Implementing a regular cleaning schedule for buses to address cleanliness concerns.</li>
+                            <li>Exploring options to extend public transport operating hours, particularly in the evenings, to meet public demand.</li>
+                        </ul>
+                        <p class="font-bold">5. Conclusion</p>
+                        <p>While bus frequency is generally satisfactory, improvements in cleanliness and the provision of extended evening services would significantly enhance overall public transport satisfaction in the area.</p>
+                    </div>
+                    <p class="text-gray-600 mt-4">**How to Use in Google Classroom:** Provide the survey data and the report structure. Students can use Gemini to help them draft each section, focusing on clear, concise, and formal language. This is a comprehensive task that develops advanced writing skills.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-white mt-16 py-6">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2025 ESL Skills Navigator. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function wrapLabels(label, maxWidth) {
+            const words = label.split(' ');
+            let lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > maxWidth) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        }
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+        
+        const chartColors = {
+            red: '#FF4E50',
+            orange: '#FC913A',
+            yellow: '#F9D423',
+            lightGreen: '#EDE574',
+            lighterGreen: '#E1F5C4',
+            gray: 'rgba(107, 114, 128, 0.5)'
+        };
+
+        const defaultChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: {
+                            family: "'Inter', sans-serif",
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: 'rgba(200, 200, 200, 0.2)'
+                    },
+                    ticks: {
+                        font: {
+                            family: "'Inter', sans-serif",
+                        }
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        font: {
+                            family: "'Inter', sans-serif",
+                        }
+                    }
+                }
+            }
+        };
+
+        new Chart(document.getElementById('coreSkillsChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Speaking & Listening', 'Reading', 'Writing'],
+                datasets: [{
+                    label: 'Core Skills',
+                    data: [33.3, 33.3, 33.3],
+                    backgroundColor: [chartColors.red, chartColors.orange, chartColors.yellow],
+                    borderColor: '#fff',
+                    borderWidth: 4,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                ...defaultChartOptions,
+                cutout: '70%',
+                scales: {
+                    y: { display: false },
+                    x: { display: false }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('progressionChart'), {
+            type: 'radar',
+            data: {
+                labels: ['Speaking & Listening', 'Reading', 'Writing'],
+                datasets: [
+                    {
+                        label: 'Entry 3',
+                        data: [2, 2, 2],
+                        backgroundColor: 'rgba(255, 78, 80, 0.2)',
+                        borderColor: chartColors.red,
+                        pointBackgroundColor: chartColors.red,
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: chartColors.red
+                    },
+                    {
+                        label: 'Level 1',
+                        data: [4, 4, 4],
+                        backgroundColor: 'rgba(252, 145, 58, 0.2)',
+                        borderColor: chartColors.orange,
+                        pointBackgroundColor: chartColors.orange,
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: chartColors.orange
+                    },
+                    {
+                        label: 'Level 2',
+                        data: [6, 6, 6],
+                        backgroundColor: 'rgba(249, 212, 35, 0.2)',
+                        borderColor: chartColors.yellow,
+                        pointBackgroundColor: chartColors.yellow,
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: chartColors.yellow
+                    }
+                ]
+            },
+            options: {
+                ...defaultChartOptions,
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(0,0,0,0.1)' },
+                        grid: { color: 'rgba(0,0,0,0.1)' },
+                        pointLabels: { font: { size: 14, family: "'Inter', sans-serif" } },
+                        ticks: {
+                            backdropColor: 'transparent',
+                            stepSize: 2
+                        }
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('promptTypesChart'), {
+            type: 'bar',
+            data: {
+                labels: [
+                    wrapLabels('Formal Writing (Email/Report)', 16),
+                    wrapLabels('Job-Related Tasks', 16),
+                    wrapLabels('Announcements & Presentations', 16),
+                    wrapLabels('Discussions & Comparisons', 16)
+                ],
+                datasets: [{
+                    label: 'Number of Prompt Ideas',
+                    data: [3, 1, 2, 3],
+                    backgroundColor: [chartColors.red, chartColors.orange, chartColors.yellow, chartColors.lightGreen],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                ...defaultChartOptions,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: { stepSize: 1 }
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('writingTasksChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Entry 3', 'Level 1', 'Level 2'],
+                datasets: [
+                    {
+                        label: 'Basic Communication',
+                        data: [1, 0, 0],
+                        backgroundColor: chartColors.red
+                    },
+                    {
+                        label: 'Structured Formal',
+                        data: [0, 1, 0],
+                        backgroundColor: chartColors.orange
+                    },
+                    {
+                        label: 'Analytical Report',
+                        data: [0, 0, 1],
+                        backgroundColor: chartColors.yellow
+                    }
+                ]
+            },
+            options: {
+                ...defaultChartOptions,
+                scales: {
+                    x: { stacked: true },
+                    y: { stacked: true, ticks: { stepSize: 1 } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
