@@ -27,20 +27,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
-<body class="bg-gray-100">
-<!-- Navigation Header -->
-<nav class="bg-white shadow-md sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16">
-            <!-- Logo Section -->
-            <div class="flex-shrink-0">
-                <a href="https://vonkubler.github.io/file.svg"
-                    <!-- You can replace this SVG with your own logo -->
-                         />
-                    </svg>
-                    <span class="font-bold text-xl text-gray-800">SCES</span>
-                </a>
-            </div>
+
 
             <!-- Desktop Navigation Links -->
             <div class="hidden md:block">
@@ -85,29 +72,5 @@
         closeIcon.classList.toggle('hidden');
     });
 </script>
-        
-
-</body>
-</html>
-                
-
-
-<script>
-    // JavaScript to toggle the mobile menu
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const openIcon = mobileMenuButton.querySelector('svg.block');
-    const closeIcon = mobileMenuButton.querySelector('svg.hidden');
-
-    mobileMenuButton.addEventListener('click', () => {
-        const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
-        mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
-        mobileMenu.classList.toggle('hidden');
-        openIcon.classList.toggle('hidden');
-        closeIcon.classList.toggle('hidden');
-    });
-</script>
-        
-
 </body>
 </html>
