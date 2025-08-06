@@ -59,9 +59,7 @@
   
         </header>
 
-    
 
-    <script>
 <script>
     // JavaScript to toggle the mobile menu
     const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -78,16 +76,6 @@
     });
 </script>
         
-            `
-        };
 
-        function navigate() {
-            const page = window.location.hash.substring(1) || 'home';
-            content.innerHTML = pages[page] || pages.home;
-        }
-
-        window.addEventListener('hashchange', navigate);
-        navigate(); // Initial page load
-    </script>
 </body>
 </html>
