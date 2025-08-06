@@ -101,6 +101,21 @@
     </div>
 
     <script>
+<script>
+    // JavaScript to toggle the mobile menu
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const openIcon = mobileMenuButton.querySelector('svg.block');
+    const closeIcon = mobileMenuButton.querySelector('svg.hidden');
+
+    mobileMenuButton.addEventListener('click', () => {
+        const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+        mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+        mobileMenu.classList.toggle('hidden');
+        openIcon.classList.toggle('hidden');
+        closeIcon.classList.toggle('hidden');
+    });
+</script>
         const content = document.getElementById('content');
 
         const pages = {
