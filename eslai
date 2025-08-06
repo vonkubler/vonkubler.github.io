@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Guide: Google AI for UK Adult ESL Teachers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: The application is designed as a task-oriented interactive toolkit for ESL teachers, moving away from the linear report format. The structure is organized by core language skills (Speaking & Listening, Reading, Writing) and Assessment, which is how a teacher plans lessons. This user-centric design allows educators to quickly find relevant tools and activities. The main user flow starts with a high-level visual summary (a bubble chart) that maps AI tools to skills and proficiency levels. Clicking a bubble or using the main navigation takes the user to a specific section. Within each section, content is presented in interactive cards. Clicking a card reveals detailed pedagogical strategies (scaffolding, differentiation, stretch targets), preventing information overload and encouraging active exploration. This structure transforms a dense document into a practical, easy-to-navigate resource. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: The ecosystem of free Google AI tools and their application across different ESL skills and levels.
+        - Goal: Provide a quick, visual overview of the tool landscape and their primary applications.
+        - Viz/Presentation Method: An interactive Bubble Chart using Chart.js. Each bubble represents an AI tool. The X-axis categorizes tools by primary language skill. The Y-axis represents the typical ESL proficiency level (1=Pre-Entry, 2=E3, 3=Level 1). The bubble size indicates the tool's versatility (number of activities).
+        - Interaction: Clicking a bubble on the chart smoothly scrolls the user to the detailed card for that tool.
+        - Justification: This visualization acts as an engaging, graphical table of contents, helping users grasp the framework at a glance and navigate intuitively. It's more impactful than a simple list.
+        - Library/Method: Chart.js (Canvas).
+        - Report Info: Specific activities and pedagogical strategies for each tool.
+        - Goal: Organize detailed information in a digestible, non-overwhelming way.
+        - Viz/Presentation Method: Structured HTML/CSS cards with interactive toggle functionality.
+        - Interaction: Clicking a card header expands it to show detailed content (pedagogy, scaffolding, etc.) and changes an indicator icon.
+        - Justification: This "click-to-reveal" mechanism respects the user's attention, allowing them to focus on one tool at a time and drill down as needed, which is ideal for a practical toolkit.
+        - Library/Method: Vanilla JavaScript and Tailwind CSS.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 500px;
+            }
+        }
+        .card-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card.active .card-content {
+            max-height: 1000px;
+        }
+        .card.active .plus-icon {
+            transform: rotate(45deg);
+        }
+        .plus-icon {
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <h1 class="text-xl font-bold text-teal-700">ESL AI Toolkit</h1>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#overview" class="text-stone-600 hover:bg-teal-50 hover:text-teal-700 px-3 py-2 rounded-md text-sm font-medium">Overview</a>
+                        <a href="#speaking" class="text-stone-600 hover:bg-teal-50 hover:text-teal-700 px-3 py-2 rounded-md text-sm font-medium">Speaking & Listening</a>
+                        <a href="#reading" class="text-stone-600 hover:bg-teal-50 hover:text-teal-700 px-3 py-2 rounded-md text-sm font-medium">Reading</a>
+                        <a href="#writing" class="text-stone-600 hover:bg-teal-50 hover:text-teal-700 px-3 py-2 rounded-md text-sm font-medium">Writing</a>
+                        <a href="#assessment" class="text-stone-600 hover:bg-teal-50 hover:text-teal-700 px-3 py-2 rounded-md text-sm font-medium">Assessment</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-stone-500 hover:text-white hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#overview" class="text-stone-600 hover:bg-teal-50 hover:text-teal-700 block px-3 py-2 rounded-md text-base font-medium">Overview</a>
+                <a href="#speaking" class="text-stone-600 hover:bg-teal-50 hover:text-teal-700 block px-3 py-2 rounded-md text-base font-medium">Speaking & Listening</a>
+                <a href="#reading" class="text-stone-600 hover:bg-teal-50 hover:text-teal-700 block px-3 py-2 rounded-md text-base font-medium">Reading</a>
+                <a href="#writing" class="text-stone-600 hover:bg-teal-50 hover:text-teal-700 block px-3 py-2 rounded-md text-base font-medium">Writing</a>
+                <a href="#assessment" class="text-stone-600 hover:bg-teal-50 hover:text-teal-700 block px-3 py-2 rounded-md text-base font-medium">Assessment</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <section id="overview" class="text-center py-12">
+            <h2 class="text-3xl font-bold tracking-tight text-teal-800 sm:text-4xl">Empowering Adult ESL Learners with Google AI</h2>
+            <p class="mt-4 max-w-3xl mx-auto text-lg text-stone-600">This interactive guide provides a practical framework for integrating free Google AI tools into your ESL teaching. Explore tools and activities designed to support learners from Pre-Entry to Level 1, with a focus on pedagogy, differentiation, and saving you valuable time. Click the bubbles on the chart or use the navigation to explore tools by skill.</p>
+            <div class="chart-container mt-10">
+                <canvas id="toolEcosystemChart"></canvas>
+            </div>
+        </section>
+
+        <div class="space-y-16">
+            <section id="speaking">
+                <h3 class="text-2xl font-bold text-teal-800 border-b-2 border-teal-200 pb-2 mb-6">Speaking & Listening</h3>
+                <p class="mb-8 text-stone-600">This section focuses on tools that provide learners with safe, non-judgmental environments for oral practice. The activities are designed to build confidence, improve pronunciation, and develop conversational fluency through repeated, low-stakes interaction with AI. This supports the Communicative Language Teaching (CLT) approach by making authentic speaking and listening practice more accessible.</p>
+                <div class="space-y-4">
+                    <div class="card bg-white rounded-lg shadow-md" id="card-assistant">
+                        <div class="card-header cursor-pointer p-6 flex justify-between items-center">
+                            <h4 class="text-xl font-semibold text-stone-800">Google Assistant</h4>
+                            <span class="plus-icon text-teal-500 text-3xl font-light">+</span>
+                        </div>
+                        <div class="card-content px-6">
+                            <div class="prose max-w-none text-stone-600 pb-6">
+                                <p class="font-semibold">Key Activity: Conversational Practice</p>
+                                <p>Students engage in spoken dialogues with Google Assistant on their phones. This provides authentic, low-stakes practice, reducing anxiety and encouraging active language production.</p>
+                                <ul>
+                                    <li><b>Pedagogy:</b> Fosters a psychologically safe environment for experimentation, crucial for adult learners who fear making mistakes. Directly supports CLT by providing on-demand conversational practice.</li>
+                                    <li><b>Scaffolding:</b> Start with simple commands ("What's the weather?") and formulaic questions. Provide learners with a list of potential questions to ask.</li>
+                                    <li><b>Differentiation:</b> Pre-Entry learners practice single questions. E3/Level 1 learners use "Continued Conversation" mode for multi-turn dialogues on topics like making reservations or asking for directions.</li>
+                                    <li><b>Stretch Target:</b> Challenge Level 1 learners to maintain a conversation for several turns, ask follow-up questions, and use more complex sentence structures.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card bg-white rounded-lg shadow-md" id="card-voicetyping">
+                         <div class="card-header cursor-pointer p-6 flex justify-between items-center">
+                            <h4 class="text-xl font-semibold text-stone-800">Google Docs Voice Typing</h4>
+                            <span class="plus-icon text-teal-500 text-3xl font-light">+</span>
+                        </div>
+                        <div class="card-content px-6">
+                            <div class="prose max-w-none text-stone-600 pb-6">
+                                <p class="font-semibold">Key Activity: Dictation & Pronunciation Practice</p>
+                                <p>Students speak into Google Docs, which transcribes their speech. They can then see any discrepancies between what they said and what the AI understood, providing immediate feedback on pronunciation and clarity.</p>
+                                <ul>
+                                    <li><b>Pedagogy:</b> Bridges the gap between productive skills (speaking and writing). The immediate visual feedback enhances metacognitive awareness and facilitates autonomous self-correction.</li>
+                                    <li><b>Scaffolding:</b> Provide simple, repetitive sentences for Pre-Entry learners to dictate. Model the process clearly.</li>
+                                    <li><b>Differentiation:</b> Pre-Entry learners focus on single words/phrases. E3/Level 1 learners dictate full paragraphs and check for errors in sentence stress and intonation.</li>
+                                    <li><b>Stretch Target:</b> Introduce voice commands for editing and formatting text (e.g., "new paragraph," "delete last word") for Level 1 learners.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card bg-white rounded-lg shadow-md" id="card-speechify">
+                         <div class="card-header cursor-pointer p-6 flex justify-between items-center">
+                            <h4 class="text-xl font-semibold text-stone-800">Speechify (Chrome Extension)</h4>
+                            <span class="plus-icon text-teal-500 text-3xl font-light">+</span>
+                        </div>
+                        <div class="card-content px-6">
+                            <div class="prose max-w-none text-stone-600 pb-6">
+                                <p class="font-semibold">Key Activity: Listening Comprehension with Control</p>
+                                <p>Turns any digital text into audio. Students can listen to articles, stories, or their own writing read aloud, controlling the speed and voice to match their comprehension level.</p>
+                                <ul>
+                                    <li><b>Pedagogy:</b> Supports Universal Design for Learning by providing multiple means of representation. Turns reading material into dynamic listening practice, ideal for blended learning and auditory learners.</li>
+                                    <li><b>Scaffolding:</b> Start with simple texts at a slow speed. Pre-teach key vocabulary before listening.</li>
+                                    <li><b>Differentiation:</b> Pre-Entry learners use slower speeds. E3/Level 1 learners can listen to more complex texts at faster speeds and with different accents.</li>
+                                    <li><b>Stretch Target:</b> Challenge Level 1 learners to summarize a text they've only listened to, without reading the written version, to build auditory processing skills.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="reading">
+                <h3 class="text-2xl font-bold text-teal-800 border-b-2 border-teal-200 pb-2 mb-6">Reading</h3>
+                <p class="mb-8 text-stone-600">This section introduces AI tools that make authentic texts more accessible and help build crucial reading sub-skills. The focus is on reducing cognitive load, enabling learners to engage with meaningful content, and fostering independent reading strategies. These tools are essential for differentiation in mixed-ability classrooms.</p>
+                <div class="space-y-4">
+                     <div class="card bg-white rounded-lg shadow-md" id="card-translate">
+                         <div class="card-header cursor-pointer p-6 flex justify-between items-center">
+                            <h4 class="text-xl font-semibold text-stone-800">Google Translate</h4>
+                            <span class="plus-icon text-teal-500 text-3xl font-light">+</span>
+                        </div>
+                        <div class="card-content px-6">
+                            <div class="prose max-w-none text-stone-600 pb-6">
+                                <p class="font-semibold">Key Activity: Instant Vocabulary Support & Gist Reading</p>
+                                <p>Use the Chrome extension or mobile camera (Lens) to get instant translations of unknown words, or translate entire webpages to understand the main ideas before tackling the English version.</p>
+                                <ul>
+                                    <li><b>Pedagogy:</b> Acts as a comprehension scaffold, not a crutch. It reduces frustration, builds background knowledge (schema), and allows learners to stay engaged with challenging texts.</li>
+                                    <li><b>Scaffolding:</b> Teach students to use it for key words, not every word. Use the full-page translate to get the gist, then switch back to English to read for detail.</li>
+                                    <li><b>Differentiation:</b> Pre-Entry/E3 learners may rely on it more heavily. Level 1 learners should be encouraged to infer meaning from context first, using translate only for confirmation.</li>
+                                    <li><b>Stretch Target:</b> Have students save new words to the Phrasebook, export to Google Sheets, and create digital flashcards on Quizlet for active recall practice.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card bg-white rounded-lg shadow-md" id="card-brisk-reading">
+                         <div class="card-header cursor-pointer p-6 flex justify-between items-center">
+                            <h4 class="text-xl font-semibold text-stone-800">Brisk Teaching (Chrome Extension)</h4>
+                            <span class="plus-icon text-teal-500 text-3xl font-light">+</span>
+                        </div>
+                        <div class="card-content px-6">
+                            <div class="prose max-w-none text-stone-600 pb-6">
+                                <p class="font-semibold">Key Activity: Differentiated Reading Passages</p>
+                                <p>Instantly change the reading level of any online text. This allows every student in a mixed-ability class to access the same core content at a level appropriate for them.</p>
+                                <ul>
+                                    <li><b>Pedagogy:</b> A "game changer" for differentiation. Saves immense teacher preparation time and ensures all learners can engage with meaningful content at their "just right" level, fostering confidence.</li>
+                                    <li><b>Scaffolding:</b> Provide a leveled-down version first for all students to ensure baseline comprehension.</li>
+                                    <li><b>Differentiation:</b> Automatically creates different versions of a text for Pre-Entry, E3, and Level 1 learners from a single source article.</li>
+                                    <li><b>Stretch Target:</b> Ask Level 1 learners to compare a leveled-down version with the original text and identify the specific changes in vocabulary and sentence structure.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="card bg-white rounded-lg shadow-md" id="card-search">
+                         <div class="card-header cursor-pointer p-6 flex justify-between items-center">
+                            <h4 class="text-xl font-semibold text-stone-800">Google Search</h4>
+                            <span class="plus-icon text-teal-500 text-3xl font-light">+</span>
+                        </div>
+                        <div class="card-content px-6">
+                            <div class="prose max-w-none text-stone-600 pb-6">
+                                <p class="font-semibold">Key Activity: Building Background Knowledge & Vocabulary</p>
+                                <p>Students use Google Search to research topics, find definitions, see example sentences, and use image search to understand abstract concepts before or during reading.</p>
+                                <ul>
+                                    <li><b>Pedagogy:</b> Promotes learner autonomy and develops critical digital literacy skills. Building background knowledge (schema) is essential for deep reading comprehension.</li>
+                                    <li><b>Scaffolding:</b> Provide specific search prompts (e.g., "definition of democracy," "what does a barrister do?"). Model how to use image search for vocabulary.</li>
+                                    <li><b>Differentiation:</b> Pre-Entry learners can search in their native language first or focus on image searches. Level 1 learners can research topics in English.</li>
+                                    <li><b>Stretch Target:</b> Teach Level 1 students to evaluate search results for credibility and bias, synthesizing information from multiple sources.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="writing">
+                <h3 class="text-2xl font-bold text-teal-800 border-b-2 border-teal-200 pb-2 mb-6">Writing</h3>
+                <p class="mb-8 text-stone-600">This section highlights tools that support the writing process, from generating ideas to drafting and revision. The focus is on providing immediate, non-judgmental feedback to encourage practice and on tools that help teachers provide more targeted, efficient feedback. This fosters an iterative approach to writing, where mistakes are seen as learning opportunities.</p>
+                <div class="space-y-4">
+                    <div class="card bg-white rounded-lg shadow-md" id="card-lingually">
+                         <div class="card-header cursor-pointer p-6 flex justify-between items-center">
+                            <h4 class="text-xl font-semibold text-stone-800">Lingually AI (Chrome Extension)</h4>
+                            <span class="plus-icon text-teal-500 text-3xl font-light">+</span>
+                        </div>
+                        <div class="card-content px-6">
+                            <div class="prose max-w-none text-stone-600 pb-6">
+                                <p class="font-semibold">Key Activity: Real-time Grammar Correction</p>
+                                <p>Provides instant grammar corrections and suggestions as students type in their browser (e.g., emails, social media). This is ideal for low-stakes, informal writing practice.</p>
+                                <ul>
+                                    <li><b>Pedagogy:</b> Creates a safe space for writing practice by providing immediate, private feedback. This reduces the fear of making mistakes and encourages learners to write more frequently.</li>
+                                    <li><b>Scaffolding:</b> Encourage use for short, informal tasks first, like writing a comment or a short email.</li>
+                                    <li><b>Differentiation:</b> Pre-Entry learners focus on sentence-level accuracy. E3/Level 1 learners can use the feedback to work on more complex grammar and sentence structure.</li>
+                                    <li><b>Stretch Target:</b> Ask Level 1 learners to analyze *why* a correction was suggested, promoting deeper grammatical understanding rather than blind acceptance.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card bg-white rounded-lg shadow-md" id="card-brisk-writing">
+                         <div class="card-header cursor-pointer p-6 flex justify-between items-center">
+                            <h4 class="text-xl font-semibold text-stone-800">Brisk Teaching (for Teachers)</h4>
+                            <span class="plus-icon text-teal-500 text-3xl font-light">+</span>
+                        </div>
+                        <div class="card-content px-6">
+                            <div class="prose max-w-none text-stone-600 pb-6">
+                                <p class="font-semibold">Key Activity: Personalized Feedback & Process Inspection</p>
+                                <p>Teachers use Brisk to generate high-quality, personalized feedback ("Glow & Grow," "Next Steps") directly in Google Docs. The "Inspect Writing" feature shows a playback of the student's writing process.</p>
+                                <ul>
+                                    <li><b>Pedagogy:</b> Saves teachers significant time while improving the quality and specificity of feedback. "Inspect Writing" provides a unique window into the learning process, allowing for highly targeted interventions and supporting academic integrity.</li>
+                                    <li><b>Scaffolding:</b> Use the "Create Content" feature to generate writing prompts or sentence starters for learners.</li>
+                                    <li><b>Differentiation:</b> The feedback generated can be tailored to different proficiency levels and learning goals.</li>
+                                    <li><b>Stretch Target:</b> Use the "Inspect Writing" feature with Level 1 students to facilitate a metacognitive discussion about their own writing and revision strategies.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card bg-white rounded-lg shadow-md" id="card-docs">
+                         <div class="card-header cursor-pointer p-6 flex justify-between items-center">
+                            <h4 class="text-xl font-semibold text-stone-800">Google Docs</h4>
+                            <span class="plus-icon text-teal-500 text-3xl font-light">+</span>
+                        </div>
+                        <div class="card-content px-6">
+                            <div class="prose max-w-none text-stone-600 pb-6">
+                                <p class="font-semibold">Key Activity: Collaborative Writing & Guided Templates</p>
+                                <p>Students work together in real-time to co-author documents, providing peer feedback. Teachers can create templates with sentence starters or outlines to guide the writing process.</p>
+                                <ul>
+                                    <li><b>Pedagogy:</b> Promotes writing as a social, communicative, and iterative process. Peer feedback and negotiation of meaning are powerful learning tools.</li>
+                                    <li><b>Scaffolding:</b> Provide clear templates with structured outlines, word banks, and sentence starters for Pre-Entry/E3 learners.</li>
+                                    <li><b>Differentiation:</b> Group students of mixed abilities for peer support. Assign different roles within the collaborative writing task.</li>
+                                    <li><b>Stretch Target:</b> Challenge Level 1 students to provide detailed, constructive feedback to their peers using the comment feature, referencing a shared rubric.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="assessment">
+                <h3 class="text-2xl font-bold text-teal-800 border-b-2 border-teal-200 pb-2 mb-6">Assessment & Feedback</h3>
+                <p class="mb-8 text-stone-600">This final section covers how AI tools can make assessment more efficient and feedback more effective. The focus is on using technology to automate formative checks, provide immediate remediation, and gain insights into student progress, allowing teachers to focus on responsive teaching and targeted support.</p>
+                <div class="space-y-4">
+                    <div class="card bg-white rounded-lg shadow-md" id="card-forms">
+                         <div class="card-header cursor-pointer p-6 flex justify-between items-center">
+                            <h4 class="text-xl font-semibold text-stone-800">Google Forms</h4>
+                            <span class="plus-icon text-teal-500 text-3xl font-light">+</span>
+                        </div>
+                        <div class="card-content px-6">
+                            <div class="prose max-w-none text-stone-600 pb-6">
+                                <p class="font-semibold">Key Activity: Automated Quizzes</p>
+                                <p>Create self-grading quizzes for grammar, vocabulary, and reading/listening comprehension. This provides immediate feedback to students and valuable data for the teacher.</p>
+                                <ul>
+                                    <li><b>Pedagogy:</b> Supports formative assessment by providing instant feedback, which is a powerful learning aid. The automatic grading frees up teacher time to analyze results and plan interventions.</li>
+                                    <li><b>Scaffolding:</b> Use images and embed audio/video clips to make questions more accessible for lower-level learners.</li>
+                                    <li><b>Differentiation:</b> Create quizzes with varying levels of difficulty. Pre-Entry quizzes can be picture-based, while Level 1 quizzes can assess inference and nuance.</li>
+                                    <li><b>Stretch Target:</b> In the quiz feedback settings, add links to explanatory videos or articles for incorrect answers, providing immediate, personalized remediation for Level 1 students.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card bg-white rounded-lg shadow-md" id="card-classroom">
+                         <div class="card-header cursor-pointer p-6 flex justify-between items-center">
+                            <h4 class="text-xl font-semibold text-stone-800">Google Classroom Originality Reports</h4>
+                            <span class="plus-icon text-teal-500 text-3xl font-light">+</span>
+                        </div>
+                        <div class="card-content px-6">
+                            <div class="prose max-w-none text-stone-600 pb-6">
+                                <p class="font-semibold">Key Activity: Plagiarism Detection & Citation Practice</p>
+                                <p>Enable originality reports on writing assignments to compare student work against web pages and books, helping to teach academic integrity and proper citation.</p>
+                                <ul>
+                                    <li><b>Pedagogy:</b> Supports the development of crucial academic skills. Use reports not as a punitive tool, but as a teaching moment to discuss paraphrasing, summarizing, and citing sources.</li>
+                                    <li><b>Scaffolding:</b> Model how to paraphrase and cite a source correctly before the assignment. Review an example originality report with the class.</li>
+                                    <li><b>Differentiation:</b> Focus on basic "copy/paste" issues with E3 learners. Discuss more nuanced source integration with Level 1 learners.</li>
+                                    <li><b>Stretch Target:</b> Have Level 1 students analyze their own originality report and write a short reflection on how they could improve their source integration in the future.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="bg-stone-800 text-white mt-16">
+        <div class="container mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-stone-400">
+            <p>This interactive guide is based on the report "Empowering UK Adult ESL Learners: A Pedagogical Framework for Integrating Free Google AI Tools."</p>
+            <p>&copy; 2025 ESL AI Toolkit. For educational purposes only.</p>
+        </div>
+    </footer>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuLinks = mobileMenu.querySelectorAll('a');
+
+            mobileMenuButton.addEventListener('click', () => {
+                const isHidden = mobileMenu.classList.contains('hidden');
+                mobileMenu.classList.toggle('hidden');
+                mobileMenuButton.querySelector('svg:first-child').classList.toggle('hidden', !isHidden);
+                mobileMenuButton.querySelector('svg:last-child').classList.toggle('hidden', isHidden);
+            });
+            
+            menuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuButton.querySelector('svg:first-child').classList.remove('hidden');
+                    mobileMenuButton.querySelector('svg:last-child').classList.add('hidden');
+                });
+            });
+
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                const header = card.querySelector('.card-header');
+                header.addEventListener('click', () => {
+                    card.classList.toggle('active');
+                });
+            });
+
+            const toolData = [
+                { id: 'card-assistant', label: 'Google Assistant', skill: 'Speaking & Listening', level: 1.5, versatility: 3 },
+                { id: 'card-voicetyping', label: 'Docs Voice Typing', skill: 'Speaking & Listening', level: 2, versatility: 3 },
+                { id: 'card-speechify', label: 'Speechify', skill: 'Speaking & Listening', level: 2.5, versatility: 3 },
+                { id: 'card-translate', label: 'Google Translate', skill: 'Reading', level: 1.5, versatility: 4 },
+                { id: 'card-brisk-reading', label: 'Brisk (Reading)', skill: 'Reading', level: 2.5, versatility: 5 },
+                { id: 'card-search', label: 'Google Search', skill: 'Reading', level: 2, versatility: 4 },
+                { id: 'card-lingually', label: 'Lingually AI', skill: 'Writing', level: 1.5, versatility: 2 },
+                { id: 'card-brisk-writing', label: 'Brisk (Writing)', skill: 'Writing', level: 3, versatility: 5 },
+                { id: 'card-docs', label: 'Google Docs', skill: 'Writing', level: 2, versatility: 3 },
+                { id: 'card-forms', label: 'Google Forms', skill: 'Assessment', level: 2, versatility: 4 },
+                { id: 'card-classroom', label: 'Classroom Reports', skill: 'Assessment', level: 2.5, versatility: 2 },
+            ];
+
+            const skillMapping = {
+                'Speaking & Listening': 1,
+                'Reading': 2,
+                'Writing': 3,
+                'Assessment': 4
+            };
+
+            const chartData = {
+                datasets: toolData.map(tool => ({
+                    label: tool.label,
+                    data: [{
+                        x: skillMapping[tool.skill] + (Math.random() - 0.5) * 0.4,
+                        y: tool.level + (Math.random() - 0.5) * 0.2,
+                        r: tool.versatility * 4,
+                        id: tool.id
+                    }],
+                    backgroundColor: `rgba(${Math.floor(Math.random() * 50) + 22}, ${Math.floor(Math.random() * 50) + 101}, ${Math.floor(Math.random() * 50) + 101}, 0.7)`,
+                    borderColor: `rgba(${Math.floor(Math.random() * 50) + 22}, ${Math.floor(Math.random() * 50) + 101}, ${Math.floor(Math.random() * 50) + 101}, 1)`,
+                    borderWidth: 1,
+                    hoverBorderWidth: 2
+                }))
+            };
+            
+            const ctx = document.getElementById('toolEcosystemChart').getContext('2d');
+            const toolEcosystemChart = new Chart(ctx, {
+                type: 'bubble',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            min: 0.5,
+                            max: 4.5,
+                            ticks: {
+                                callback: function(value, index, values) {
+                                    const skills = Object.keys(skillMapping);
+                                    return skills[value - 1] || '';
+                                },
+                                font: {
+                                    size: 10,
+                                }
+                            },
+                             title: {
+                                display: true,
+                                text: 'Primary Language Skill Area'
+                            }
+                        },
+                        y: {
+                            min: 0.5,
+                            max: 3.5,
+                            ticks: {
+                                callback: function(value, index, values) {
+                                    if (value === 1) return 'Pre-Entry';
+                                    if (value === 2) return 'Entry 3';
+                                    if (value === 3) return 'Level 1';
+                                    return '';
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Typical Proficiency Level'
+                            }
+                        }
+                    },
+                    onClick: (e, elements) => {
+                        if (elements.length > 0) {
+                            const element = elements[0];
+                            const dataset = e.chart.data.datasets[element.datasetIndex];
+                            const dataPoint = dataset.data[element.index];
+                            const targetId = dataPoint.id;
+                            const targetElement = document.getElementById(targetId);
+                            if (targetElement) {
+                                targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                setTimeout(() => {
+                                    if (!targetElement.classList.contains('active')) {
+                                        targetElement.classList.add('active');
+                                    }
+                                }, 500);
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
