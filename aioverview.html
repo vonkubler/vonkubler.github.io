@@ -10,29 +10,32 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        body {
+        #infographic-container {
+            z-index: 1000;
+        }
+        #infographic-container body {
             font-family: 'Inter', sans-serif;
             background-color: #F8F9FA;
             color: #212529;
         }
-        .brand-primary { color: #007BFF; }
-        .bg-brand-primary { background-color: #007BFF; }
-        .brand-accent { color: #00C49F; }
-        .bg-brand-accent { background-color: #00C49F; }
-        .brand-secondary { color: #FFC107; }
-        .bg-brand-secondary { background-color: #FFC107; }
-        .card {
+        #infographic-container .brand-primary { color: #007BFF; }
+        #infographic-container .bg-brand-primary { background-color: #007BFF; }
+        #infographic-container .brand-accent { color: #00C49F; }
+        #infographic-container .bg-brand-accent { background-color: #00C49F; }
+        #infographic-container .brand-secondary { color: #FFC107; }
+        #infographic-container .bg-brand-secondary { background-color: #FFC107; }
+        #infographic-container .card {
             background-color: white;
             border-radius: 0.75rem;
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
             padding: 1.5rem;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .card:hover {
+        #infographic-container .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
         }
-        .chart-container {
+        #infographic-container .chart-container {
             position: relative;
             width: 100%;
             max-width: 600px;
@@ -42,11 +45,11 @@
             max-height: 400px;
         }
         @media (min-width: 768px) {
-            .chart-container {
+            #infographic-container .chart-container {
                 height: 350px;
             }
         }
-        .flowchart-step {
+        #infographic-container .flowchart-step {
             position: relative;
             padding: 1rem;
             background-color: #ffffff;
@@ -55,7 +58,7 @@
             text-align: center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
-        .flowchart-arrow {
+        #infographic-container .flowchart-arrow {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -63,7 +66,7 @@
             color: #007BFF;
             margin: 0.5rem 0;
         }
-        .big-stat-number {
+        #infographic-container .big-stat-number {
             font-size: 4rem;
             font-weight: 900;
             line-height: 1;
@@ -71,153 +74,153 @@
     </style>
 </head>
 <body class="antialiased">
+    <div id="infographic-container">
+        <header class="bg-brand-primary text-white text-center py-12 px-4">
+            <h1 class="text-4xl md:text-5xl font-bold mb-2">The AI-Powered English Teacher</h1>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto">Leveraging Gemini & NotebookLM to Transform Pedagogy, Save Time, and Deepen Student Learning</p>
+        </header>
 
-    <header class="bg-brand-primary text-white text-center py-12 px-4">
-        <h1 class="text-4xl md:text-5xl font-bold mb-2">The AI-Powered English Teacher</h1>
-        <p class="text-lg md:text-xl max-w-3xl mx-auto">Leveraging Gemini & NotebookLM to Transform Pedagogy, Save Time, and Deepen Student Learning</p>
-    </header>
+        <main class="container mx-auto p-4 md:p-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-    <main class="container mx-auto p-4 md:p-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <section class="card md:col-span-2 lg:col-span-3">
+                    <h2 class="text-2xl font-bold mb-4 text-center">The Two AI Powerhouses: A Comparison</h2>
+                    <p class="text-center text-gray-600 mb-6">Gemini and NotebookLM offer complementary strengths. Gemini excels at broad creation and brainstorming, while NotebookLM provides deep, source-grounded analysis.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <h3 class="text-xl font-bold brand-primary mb-3 text-center">🚀 Gemini</h3>
+                            <ul class="space-y-2 text-gray-700">
+                                <li class="flex items-start"><span class="brand-primary mr-2">✓</span> <strong>Broad Creativity:</strong> Generates lesson plans, emails, and creative text formats.</li>
+                                <li class="flex items-start"><span class="brand-primary mr-2">✓</span> <strong>Workspace Integration:</strong> Works inside Docs, Slides, and Gmail to streamline tasks.</li>
+                                <li class="flex items-start"><span class="brand-primary mr-2">✓</span> <strong>Idea Generation:</strong> A powerful partner for brainstorming and overcoming writer's block.</li>
+                                <li class="flex items-start"><span class="brand-primary mr-2">✓</span> <strong>Content Differentiation:</strong> Quickly re-levels texts for diverse student needs.</li>
+                            </ul>
+                        </div>
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <h3 class="text-xl font-bold brand-accent mb-3 text-center">📚 NotebookLM</h3>
+                            <ul class="space-y-2 text-gray-700">
+                                <li class="flex items-start"><span class="brand-accent mr-2">✓</span> <strong>Source-Grounded:</strong> Works ONLY with your uploaded documents for accuracy.</li>
+                                <li class="flex items-start"><span class="brand-accent mr-2">✓</span> <strong>Deep Analysis:</strong> "Chats" with your sources to find information and connections.</li>
+                                <li class="flex items-start"><span class="brand-accent mr-2">✓</span> <strong>Study Aids:</strong> Creates summaries, FAQs, and audio overviews from your content.</li>
+                                <li class="flex items-start"><span class="brand-accent mr-2">✓</span> <strong>Cited Responses:</strong> All answers are linked directly back to the source text.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
 
-            <section class="card md:col-span-2 lg:col-span-3">
-                <h2 class="text-2xl font-bold mb-4 text-center">The Two AI Powerhouses: A Comparison</h2>
-                <p class="text-center text-gray-600 mb-6">Gemini and NotebookLM offer complementary strengths. Gemini excels at broad creation and brainstorming, while NotebookLM provides deep, source-grounded analysis.</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="border border-gray-200 rounded-lg p-4">
-                        <h3 class="text-xl font-bold brand-primary mb-3 text-center">🚀 Gemini</h3>
-                        <ul class="space-y-2 text-gray-700">
-                            <li class="flex items-start"><span class="brand-primary mr-2">✓</span> <strong>Broad Creativity:</strong> Generates lesson plans, emails, and creative text formats.</li>
-                            <li class="flex items-start"><span class="brand-primary mr-2">✓</span> <strong>Workspace Integration:</strong> Works inside Docs, Slides, and Gmail to streamline tasks.</li>
-                            <li class="flex items-start"><span class="brand-primary mr-2">✓</span> <strong>Idea Generation:</strong> A powerful partner for brainstorming and overcoming writer's block.</li>
-                            <li class="flex items-start"><span class="brand-primary mr-2">✓</span> <strong>Content Differentiation:</strong> Quickly re-levels texts for diverse student needs.</li>
-                        </ul>
+                <section class="card lg:col-span-2">
+                    <h2 class="text-2xl font-bold mb-2 text-center">The Foundation: Effective AI Training for Teachers</h2>
+                    <p class="text-center text-gray-600 mb-6">Successful AI adoption is built on principles of adult learning. Training must be relevant, problem-focused, and respect educators' existing expertise to be truly effective.</p>
+                    <div class="chart-container">
+                        <canvas id="principlesChart"></canvas>
                     </div>
-                    <div class="border border-gray-200 rounded-lg p-4">
-                        <h3 class="text-xl font-bold brand-accent mb-3 text-center">📚 NotebookLM</h3>
-                        <ul class="space-y-2 text-gray-700">
-                            <li class="flex items-start"><span class="brand-accent mr-2">✓</span> <strong>Source-Grounded:</strong> Works ONLY with your uploaded documents for accuracy.</li>
-                            <li class="flex items-start"><span class="brand-accent mr-2">✓</span> <strong>Deep Analysis:</strong> "Chats" with your sources to find information and connections.</li>
-                            <li class="flex items-start"><span class="brand-accent mr-2">✓</span> <strong>Study Aids:</strong> Creates summaries, FAQs, and audio overviews from your content.</li>
-                            <li class="flex items-start"><span class="brand-accent mr-2">✓</span> <strong>Cited Responses:</strong> All answers are linked directly back to the source text.</li>
-                        </ul>
+                    <p class="text-sm text-gray-500 mt-4 text-center">This chart illustrates the key principles of Andragogy (adult learning theory) that should guide professional development, ensuring training is engaging and impactful for teachers.</p>
+                </section>
+                
+                <section class="card">
+                    <h2 class="text-2xl font-bold mb-2 text-center">AI in Action: Classroom Activities</h2>
+                    <p class="text-center text-gray-600 mb-6">AI unlocks new possibilities for creative and critical ELA activities. Here's a breakdown of potential applications.</p>
+                    <div class="chart-container h-80">
+                        <canvas id="activitiesChart"></canvas>
                     </div>
-                </div>
-            </section>
+                     <p class="text-sm text-gray-500 mt-4 text-center">This chart shows how AI tools can be applied across different ELA skill domains, with a strong focus on enhancing writing, analysis, and research skills.</p>
+                </section>
 
-            <section class="card lg:col-span-2">
-                <h2 class="text-2xl font-bold mb-2 text-center">The Foundation: Effective AI Training for Teachers</h2>
-                <p class="text-center text-gray-600 mb-6">Successful AI adoption is built on principles of adult learning. Training must be relevant, problem-focused, and respect educators' existing expertise to be truly effective.</p>
-                <div class="chart-container">
-                    <canvas id="principlesChart"></canvas>
-                </div>
-                <p class="text-sm text-gray-500 mt-4 text-center">This chart illustrates the key principles of Andragogy (adult learning theory) that should guide professional development, ensuring training is engaging and impactful for teachers.</p>
-            </section>
-            
-            <section class="card">
-                <h2 class="text-2xl font-bold mb-2 text-center">AI in Action: Classroom Activities</h2>
-                <p class="text-center text-gray-600 mb-6">AI unlocks new possibilities for creative and critical ELA activities. Here's a breakdown of potential applications.</p>
-                <div class="chart-container h-80">
-                    <canvas id="activitiesChart"></canvas>
-                </div>
-                 <p class="text-sm text-gray-500 mt-4 text-center">This chart shows how AI tools can be applied across different ELA skill domains, with a strong focus on enhancing writing, analysis, and research skills.</p>
-            </section>
+                <section class="card md:col-span-2 lg:col-span-3">
+                    <h2 class="text-2xl font-bold mb-4 text-center">An AI-Powered Workflow: From Research to Lesson Plan</h2>
+                    <p class="text-center text-gray-600 mb-6">By combining Gemini and NotebookLM, teachers can create a powerful and efficient workflow for developing rigorous, source-grounded instructional materials.</p>
+                    <div class="flex flex-col md:flex-row md:justify-around md:items-start space-y-4 md:space-y-0 md:space-x-4">
+                        <div class="flex-1 flowchart-step">
+                            <div class="text-2xl font-bold brand-primary mb-2">Step 1</div>
+                            <h4 class="font-semibold mb-1">Broad Research</h4>
+                            <p class="text-sm">Use <strong class="brand-primary">Gemini</strong> for initial research on a topic, generating a report with citations.</p>
+                        </div>
+                        <div class="flowchart-arrow">▼</div>
+                        <div class="flex-1 flowchart-step">
+                            <div class="text-2xl font-bold brand-accent mb-2">Step 2</div>
+                            <h4 class="font-semibold mb-1">Source Mastery</h4>
+                            <p class="text-sm">Upload the report and primary texts to <strong class="brand-accent">NotebookLM</strong> to analyze, summarize, and extract key ideas.</p>
+                        </div>
+                        <div class="flowchart-arrow">▼</div>
+                        <div class="flex-1 flowchart-step">
+                            <div class="text-2xl font-bold brand-primary mb-2">Step 3</div>
+                            <h4 class="font-semibold mb-1">Content Creation</h4>
+                            <p class="text-sm">Use <strong class="brand-primary">Gemini</strong> again to create lesson plans, quizzes, and differentiated materials based on the deep insights from NotebookLM.</p>
+                        </div>
+                    </div>
+                </section>
 
-            <section class="card md:col-span-2 lg:col-span-3">
-                <h2 class="text-2xl font-bold mb-4 text-center">An AI-Powered Workflow: From Research to Lesson Plan</h2>
-                <p class="text-center text-gray-600 mb-6">By combining Gemini and NotebookLM, teachers can create a powerful and efficient workflow for developing rigorous, source-grounded instructional materials.</p>
-                <div class="flex flex-col md:flex-row md:justify-around md:items-start space-y-4 md:space-y-0 md:space-x-4">
-                    <div class="flex-1 flowchart-step">
-                        <div class="text-2xl font-bold brand-primary mb-2">Step 1</div>
-                        <h4 class="font-semibold mb-1">Broad Research</h4>
-                        <p class="text-sm">Use <strong class="brand-primary">Gemini</strong> for initial research on a topic, generating a report with citations.</p>
-                    </div>
-                    <div class="flowchart-arrow">▼</div>
-                    <div class="flex-1 flowchart-step">
-                        <div class="text-2xl font-bold brand-accent mb-2">Step 2</div>
-                        <h4 class="font-semibold mb-1">Source Mastery</h4>
-                        <p class="text-sm">Upload the report and primary texts to <strong class="brand-accent">NotebookLM</strong> to analyze, summarize, and extract key ideas.</p>
-                    </div>
-                    <div class="flowchart-arrow">▼</div>
-                    <div class="flex-1 flowchart-step">
-                        <div class="text-2xl font-bold brand-primary mb-2">Step 3</div>
-                        <h4 class="font-semibold mb-1">Content Creation</h4>
-                        <p class="text-sm">Use <strong class="brand-primary">Gemini</strong> again to create lesson plans, quizzes, and differentiated materials based on the deep insights from NotebookLM.</p>
-                    </div>
-                </div>
-            </section>
+                <section class="card">
+                    <h3 class="text-xl font-bold mb-4 text-center">Character Dialogue Generator</h3>
+                    <p class="text-gray-600">Use <strong class="brand-primary">Gemini</strong> to explore characterization. Input traits and a scenario (e.g., "Macbeth orders a latte") to generate modern dialogue, helping students understand voice and tone.</p>
+                </section>
 
-            <section class="card">
-                <h3 class="text-xl font-bold mb-4 text-center">Character Dialogue Generator</h3>
-                <p class="text-gray-600">Use <strong class="brand-primary">Gemini</strong> to explore characterization. Input traits and a scenario (e.g., "Macbeth orders a latte") to generate modern dialogue, helping students understand voice and tone.</p>
-            </section>
+                <section class="card">
+                    <h3 class="text-xl font-bold mb-4 text-center">Source-Grounded Debate Prep</h3>
+                    <p class="text-gray-600">Use <strong class="brand-accent">NotebookLM</strong> for rigorous debate prep. Upload critical essays and have it summarize arguments for and against a topic (e.g., "Was Jay Gatsby truly great?"), complete with citations.</p>
+                </section>
 
-            <section class="card">
-                <h3 class="text-xl font-bold mb-4 text-center">Source-Grounded Debate Prep</h3>
-                <p class="text-gray-600">Use <strong class="brand-accent">NotebookLM</strong> for rigorous debate prep. Upload critical essays and have it summarize arguments for and against a topic (e.g., "Was Jay Gatsby truly great?"), complete with citations.</p>
-            </section>
+                <section class="card">
+                    <h3 class="text-xl font-bold mb-4 text-center">Thematic Mind Map</h3>
+                    <p class="text-gray-600">In <strong class="brand-accent">NotebookLM</strong>, extract concepts from multiple texts, then generate a mind map to visually explore complex thematic connections across different literary works.</p>
+                </section>
+                
+                <section class="card md:col-span-2 lg:col-span-3">
+                    <h2 class="text-2xl font-bold mb-4 text-center">Fostering AI Literacy: Navigating the Challenges</h2>
+                    <p class="text-center text-gray-600 mb-6">Responsible AI integration requires a critical mindset. Educators must guide students in using these tools ethically and effectively.</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                        <div class="p-4">
+                            <div class="text-4xl mb-2">🛡️</div>
+                            <h4 class="font-semibold">Data Privacy</h4>
+                            <p class="text-sm text-gray-600">Use enterprise-grade tools that protect student data.</p>
+                        </div>
+                        <div class="p-4">
+                            <div class="text-4xl mb-2">⚖️</div>
+                            <h4 class="font-semibold">Algorithmic Bias</h4>
+                            <p class="text-sm text-gray-600">Critically evaluate AI output for fairness and inclusivity.</p>
+                        </div>
+                        <div class="p-4">
+                            <div class="text-4xl mb-2">✍️</div>
+                            <h4 class="font-semibold">Academic Integrity</h4>
+                            <p class="text-sm text-gray-600">Teach AI as a tool for brainstorming, not for plagiarism.</p>
+                        </div>
+                        <div class="p-4">
+                            <div class="text-4xl mb-2">🤝</div>
+                            <h4 class="font-semibold">Human Connection</h4>
+                            <p class="text-sm text-gray-600">Use AI to save time for more one-on-one student interaction.</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="card md:col-span-3 text-center bg-gray-800 text-white">
+                    <h2 class="text-2xl font-bold mb-4">The Outcome: An Empowered Educator</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 py-6">
+                        <div>
+                            <p class="big-stat-number brand-primary">40%</p>
+                            <p class="font-semibold text-lg">Less Time on Admin</p>
+                            <p class="text-gray-300">Automate lesson planning and communication to focus on what matters.</p>
+                        </div>
+                        <div>
+                            <p class="big-stat-number brand-accent">75%</p>
+                            <p class="font-semibold text-lg">Easier Differentiation</p>
+                            <p class="text-gray-300">Instantly adapt materials for all learners, increasing engagement.</p>
+                        </div>
+                        <div>
+                            <p class="big-stat-number brand-secondary">100%</p>
+                            <p class="font-semibold text-lg">More Student-Centered</p>
+                            <p class="text-gray-300">Free up time for the human-centric aspects of teaching: feedback, support, and connection.</p>
+                        </div>
+                    </div>
+                </section>
 
-            <section class="card">
-                <h3 class="text-xl font-bold mb-4 text-center">Thematic Mind Map</h3>
-                <p class="text-gray-600">In <strong class="brand-accent">NotebookLM</strong>, extract concepts from multiple texts, then generate a mind map to visually explore complex thematic connections across different literary works.</p>
-            </section>
-            
-            <section class="card md:col-span-2 lg:col-span-3">
-                <h2 class="text-2xl font-bold mb-4 text-center">Fostering AI Literacy: Navigating the Challenges</h2>
-                <p class="text-center text-gray-600 mb-6">Responsible AI integration requires a critical mindset. Educators must guide students in using these tools ethically and effectively.</p>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                    <div class="p-4">
-                        <div class="text-4xl mb-2">🛡️</div>
-                        <h4 class="font-semibold">Data Privacy</h4>
-                        <p class="text-sm text-gray-600">Use enterprise-grade tools that protect student data.</p>
-                    </div>
-                    <div class="p-4">
-                        <div class="text-4xl mb-2">⚖️</div>
-                        <h4 class="font-semibold">Algorithmic Bias</h4>
-                        <p class="text-sm text-gray-600">Critically evaluate AI output for fairness and inclusivity.</p>
-                    </div>
-                    <div class="p-4">
-                        <div class="text-4xl mb-2">✍️</div>
-                        <h4 class="font-semibold">Academic Integrity</h4>
-                        <p class="text-sm text-gray-600">Teach AI as a tool for brainstorming, not for plagiarism.</p>
-                    </div>
-                    <div class="p-4">
-                        <div class="text-4xl mb-2">🤝</div>
-                        <h4 class="font-semibold">Human Connection</h4>
-                        <p class="text-sm text-gray-600">Use AI to save time for more one-on-one student interaction.</p>
-                    </div>
-                </div>
-            </section>
-            
-            <section class="card md:col-span-3 text-center bg-gray-800 text-white">
-                <h2 class="text-2xl font-bold mb-4">The Outcome: An Empowered Educator</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 py-6">
-                    <div>
-                        <p class="big-stat-number brand-primary">40%</p>
-                        <p class="font-semibold text-lg">Less Time on Admin</p>
-                        <p class="text-gray-300">Automate lesson planning and communication to focus on what matters.</p>
-                    </div>
-                    <div>
-                        <p class="big-stat-number brand-accent">75%</p>
-                        <p class="font-semibold text-lg">Easier Differentiation</p>
-                        <p class="text-gray-300">Instantly adapt materials for all learners, increasing engagement.</p>
-                    </div>
-                    <div>
-                        <p class="big-stat-number brand-secondary">100%</p>
-                        <p class="font-semibold text-lg">More Student-Centered</p>
-                        <p class="text-gray-300">Free up time for the human-centric aspects of teaching: feedback, support, and connection.</p>
-                    </div>
-                </div>
-            </section>
+            </div>
+        </main>
 
-        </div>
-    </main>
-
-    <footer class="text-center py-6 bg-gray-200 text-gray-600 text-sm">
-        <p>This infographic visualizes key concepts from the "Educating Adult English Teachers on Gemini and NotebookLM" report.</p>
-        <p>Created to demonstrate the potential of AI in enhancing ELA instruction.</p>
-    </footer>
-
+        <footer class="text-center py-6 bg-gray-200 text-gray-600 text-sm">
+            <p>This infographic visualises key concepts from the "Educating Adult English Teachers on Gemini and NotebookLM" report.</p>
+            <p>Created to demonstrate the potential of AI in enhancing ELA instruction.</p>
+        </footer>
+    </div>
     <script>
         function wrapText(text, maxLength) {
             if (text.length <= maxLength) {
