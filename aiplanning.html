@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Creative ESL Classroom</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for a clean, readable font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles to complement Tailwind */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Style for the active navigation tab */
+        .nav-link.active {
+            border-bottom: 2px solid #3b82f6; /* blue-500 */
+            color: #3b82f6;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Main container -->
+    <div class="max-w-5xl mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- Header Section -->
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-slate-900">The Creative ESL Classroom</h1>
+            <p class="mt-2 text-lg text-slate-600">Your AI Toolkit for Lesson Planning</p>
+        </header>
+
+        <!-- Navigation Bar -->
+        <nav class="mb-8 border-b border-slate-200">
+            <ul class="flex flex-wrap -mb-px justify-center text-sm font-medium text-center text-slate-500">
+                <li class="mr-2">
+                    <button class="nav-link inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-slate-600 hover:border-slate-300 active" data-target="home">Home</button>
+                </li>
+                <li class="mr-2">
+                    <button class="nav-link inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-slate-600 hover:border-slate-300" data-target="about">About</button>
+                </li>
+                <li class="mr-2">
+                    <button class="nav-link inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-slate-600 hover:border-slate-300" data-target="raft">The RAFT Method</button>
+                </li>
+                <li>
+                    <button class="nav-link inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-slate-600 hover:border-slate-300" data-target="library">Resource Library</button>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Content Sections -->
+        <main>
+            <!-- Home Section -->
+            <div id="home" class="content-section space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold mb-4 text-slate-900">Welcome! Supercharge Your ESL Teaching with AI.</h2>
+                    <p class="mb-4">Hello! Welcome to The Creative ESL Classroom, your friendly guide to using Artificial Intelligence (AI) as a powerful and practical teaching assistant.</p>
+                    <p class="mb-4">We know that planning engaging, level-appropriate lessons for adult ESL learners takes a huge amount of time. The goal of this resource is to show you how to give simple, clear instructions (called "prompts") to an AI like Gemini to generate creative and interactive materials in minutes, not hours.</p>
+                    <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-400 rounded-r-lg">
+                        <h3 class="font-bold text-slate-800">What You'll Find Here:</h3>
+                        <ul class="list-disc list-inside mt-2 space-y-1 text-slate-700">
+                            <li><span class="font-semibold">Prompting 101:</span> Learn the simple but powerful **RAFT method** to get exactly what you need, every time.</li>
+                            <li><span class="font-semibold">Resource Library:</span> See real, practical examples of prompts and the high-quality resources they generate for Functional Skills Entry 1 and 2.</li>
+                            <li><span class="font-semibold">Creative Ideas:</span> Discover how to ask for interactive materials like role-plays, information-gap activities, and visual aids that will get your learners talking.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Section -->
+            <div id="about" class="content-section hidden space-y-6">
+                 <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold mb-4 text-slate-900">About This Resource</h2>
+                    <p class="mb-4">This guide was created for busy teachers and tutors in the UK working with adult ESL learners. The focus is on creating practical, real-world materials that align with the requirements of qualifications like **Pearson Functional Skills English at Entry Levels 1 and 2**.</p>
+                    <p>The aim is not to replace your professional skills and experience, but to provide you with a tool to handle the heavy lifting of resource creation. Think of it as a creative partner that can help you brainstorm ideas, draft worksheets, and design activities, allowing you to focus more on what you do best: teaching and supporting your learners.</p>
+                </div>
+            </div>
+
+            <!-- RAFT Method Section -->
+            <div id="raft" class="content-section hidden space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold mb-4 text-slate-900">The RAFT Method for Perfect Prompts</h2>
+                    <p class="mb-6">To get the best results from your AI assistant, you need to give it clear instructions. The best prompts include four key ingredients, which you can remember with the acronym **RAFT**.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Role -->
+                        <div class="p-4 bg-slate-50 rounded-lg border">
+                            <h3 class="text-xl font-bold text-blue-600">R = ROLE 👩‍🏫</h3>
+                            <p class="mt-2 mb-3">Tell the AI who you are. This sets the professional context.</p>
+                            <ul class="list-disc list-inside text-sm space-y-1 text-slate-600">
+                                <li>"I am an English teacher in the UK."</li>
+                                <li>"I am a tutor preparing adults for their Entry 2 Speaking & Listening exam."</li>
+                                <li>"I am a volunteer helping a beginner-level adult with their writing skills."</li>
+                            </ul>
+                        </div>
+                        <!-- Audience -->
+                        <div class="p-4 bg-slate-50 rounded-lg border">
+                            <h3 class="text-xl font-bold text-blue-600">A = AUDIENCE 🧑‍🎓</h3>
+                            <p class="mt-2 mb-3">Describe your learners. This is the most critical part.</p>
+                             <ul class="list-disc list-inside text-sm space-y-1 text-slate-600">
+                                <li>"...for my Functional Skills Entry 1 class."</li>
+                                <li>"...for a student who needs to practise making a phone call to a GP."</li>
+                                <li>"...for learners who have recently moved to Stockport."</li>
+                            </ul>
+                        </div>
+                        <!-- Format -->
+                        <div class="p-4 bg-slate-50 rounded-lg border">
+                            <h3 class="text-xl font-bold text-blue-600">F = FORMAT 📝</h3>
+                            <p class="mt-2 mb-3">Say how you want it presented. This saves you time.</p>
+                             <ul class="list-disc list-inside text-sm space-y-1 text-slate-600">
+                                <li>"Organise this into a simple two-column table."</li>
+                                <li>"Design two separate role-play cards."</li>
+                                <li>"Generate a list of 10 'True or False' questions."</li>
+                            </ul>
+                        </div>
+                        <!-- Task -->
+                        <div class="p-4 bg-slate-50 rounded-lg border">
+                            <h3 class="text-xl font-bold text-blue-600">T = TASK 🎯</h3>
+                            <p class="mt-2 mb-3">Explain the activity and its learning objective.</p>
+                             <ul class="list-disc list-inside text-sm space-y-1 text-slate-600">
+                                <li>"...to practise vocabulary for different foods."</li>
+                                <li>"...create a dialogue for a customer returning a faulty item."</li>
+                                <li>"...design a matching activity to connect job titles with their place of work."</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resource Library Section -->
+            <div id="library" class="content-section hidden space-y-8">
+                <!-- Example 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-bold mb-4 text-slate-900">Resource Example 1: Entry 1 Reading Activity</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-slate-800">The Goal:</h4>
+                            <p>To give an Entry 1 learner practice in reading a simple, authentic text and finding specific information.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-800">The Prompt:</h4>
+                            <p class="p-3 bg-slate-100 border-l-4 border-slate-300 rounded-r-lg text-slate-600 italic">"I am an ESL teacher for an **Entry 1 adult learner.** Please create a simple **worksheet.** The **task** is to read a very simple text message reminder for a dental appointment. Include the place, date, and time. Then, create 3 simple questions below the text message asking 'Where?', 'When?', and 'What time?'."</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-800">The AI-Generated Resource:</h4>
+                            <div class="mt-2 border rounded-lg p-4 shadow-inner bg-slate-50">
+                                <h5 class="font-bold text-lg">Worksheet: My Appointment</h5>
+                                <p class="mt-2 mb-4"><strong>Name:</strong> ____________________</p>
+                                <p class="mb-2 font-medium">Read the text message below:</p>
+                                <div class="bg-blue-100 p-3 rounded-lg max-w-sm">
+                                    <p>Hi, just a reminder of your dental appointment at <strong>Stockport Dental Centre</strong> on <strong>Friday, 9 August</strong> at <strong>10:00 AM</strong>.</p>
+                                </div>
+                                <p class="mt-4 mb-2 font-medium">Answer the questions:</p>
+                                <ol class="list-decimal list-inside space-y-2">
+                                    <li>Where is the appointment? ____________________</li>
+                                    <li>When is the appointment? ____________________</li>
+                                    <li>What time is the appointment? ____________________</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Example 2 -->
+                 <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-bold mb-4 text-slate-900">Resource Example 2: Entry 2 Speaking & Listening Role-Play</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-slate-800">The Goal:</h4>
+                            <p>To give Entry 2 learners practice in a transactional conversation that requires asking for something and understanding a simple response.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-800">The Prompt:</h4>
+                            <p class="p-3 bg-slate-100 border-l-4 border-slate-300 rounded-r-lg text-slate-600 italic">"I am a **Functional Skills English tutor.** I need an activity for my **Entry 2 learners.** Please create **two role-play cards** for a scenario at a local chemist. **The task** is for the customer to ask for something for a headache. The chemist doesn't have the usual brand but offers an alternative. The customer should then agree."</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-800">The AI-Generated Resource:</h4>
+                            <div class="mt-2 border rounded-lg p-4 shadow-inner bg-slate-50">
+                                <h5 class="font-bold text-lg mb-4 text-center">Role-Play: At the Chemist</h5>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <!-- Card A -->
+                                    <div class="bg-white border rounded-lg p-4">
+                                        <h6 class="font-bold text-center">Card A: Customer</h6>
+                                        <ul class="mt-2 list-disc list-inside space-y-1 text-sm">
+                                            <li>You have a bad headache.</li>
+                                            <li>Go to the chemist.</li>
+                                            <li>Ask the assistant for a box of 'HeadAid' tablets.</li>
+                                            <li>Listen to the assistant. They don't have 'HeadAid'.</li>
+                                            <li>Agree to take the alternative they offer.</li>
+                                        </ul>
+                                    </div>
+                                    <!-- Card B -->
+                                    <div class="bg-white border rounded-lg p-4">
+                                        <h6 class="font-bold text-center">Card B: Chemist's Assistant</h6>
+                                        <ul class="mt-2 list-disc list-inside space-y-1 text-sm">
+                                            <li>You are working at the chemist.</li>
+                                            <li>A customer will ask you for 'HeadAid' tablets.</li>
+                                            <li>Tell them: "Sorry, we don't have any 'HeadAid' at the moment."</li>
+                                            <li>Offer them an alternative: "But we have 'ParaCure'. It's very similar. Would you like to try that?"</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Example 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-bold mb-4 text-slate-900">Resource Example 3: Entry 1 Writing Activity</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-slate-800">The Goal:</h4>
+                            <p>To give Entry 1 learners practice writing their own name on a simple form.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-800">The Prompt:</h4>
+                            <p class="p-3 bg-slate-100 border-l-4 border-slate-300 rounded-r-lg text-slate-600 italic">"I'm a teacher for an **Entry 1 adult learner**. Create a very simple **form-filling worksheet**. The **task** is for the student to write their first name and surname. Make it look like a simple library card application."</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-800">The AI-Generated Resource:</h4>
+                            <div class="mt-2 border rounded-lg p-4 shadow-inner bg-slate-50">
+                                <h5 class="font-bold text-lg text-center">Stockport Library Card Application</h5>
+                                <div class="mt-4 space-y-4 max-w-sm mx-auto">
+                                    <div class="sm:flex sm:items-center">
+                                        <label for="fname" class="w-full sm:w-1/3 font-medium mb-1 sm:mb-0">First Name:</label>
+                                        <input type="text" id="fname" class="w-full sm:w-2/3 p-2 border rounded-md bg-white" placeholder="e.g. Maria">
+                                    </div>
+                                    <div class="sm:flex sm:items-center">
+                                        <label for="sname" class="w-full sm:w-1/3 font-medium mb-1 sm:mb-0">Surname:</label>
+                                        <input type="text" id="sname" class="w-full sm:w-2/3 p-2 border rounded-md bg-white" placeholder="e.g. Jones">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Example 4 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-bold mb-4 text-slate-900">Resource Example 4: Entry 2 Reading Activity</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-slate-800">The Goal:</h4>
+                            <p>To help Entry 2 learners find specific information (prices) in a simple, formatted text like a menu.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-800">The Prompt:</h4>
+                            <p class="p-3 bg-slate-100 border-l-4 border-slate-300 rounded-r-lg text-slate-600 italic">"I'm tutoring an **Entry 2** class. Create a **worksheet with a simple café menu**. The **task** is to find the price of specific items. Below the menu, add three questions like 'How much is a...?'"</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-800">The AI-Generated Resource:</h4>
+                            <div class="mt-2 border rounded-lg p-4 shadow-inner bg-slate-50">
+                                <h5 class="font-bold text-lg text-center mb-2">The Corner Café Menu</h5>
+                                <div class="text-center mb-4 p-4 border-2 border-dashed border-slate-300 rounded-md max-w-xs mx-auto">
+                                    <p class="font-semibold">Hot Drinks</p>
+                                    <p>Tea.................£1.50</p>
+                                    <p>Coffee..............£2.00</p>
+                                    <p class="font-semibold mt-2">Sandwiches</p>
+                                    <p>Cheese..............£2.50</p>
+                                    <p>Ham.................£2.50</p>
+                                </div>
+                                <p class="font-medium">Answer the questions:</p>
+                                 <ol class="list-decimal list-inside space-y-2 mt-2">
+                                    <li>How much is a coffee? ____________________</li>
+                                    <li>How much is a cheese sandwich? ____________________</li>
+                                    <li>How much is a tea? ____________________</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Example 5 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-bold mb-4 text-slate-900">Resource Example 5: Entry 1 Speaking Activity</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-slate-800">The Goal:</h4>
+                            <p>To give Entry 1 learners practice in a simple transactional exchange (ordering one item).</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-800">The Prompt:</h4>
+                            <p class="p-3 bg-slate-100 border-l-4 border-slate-300 rounded-r-lg text-slate-600 italic">"I need a simple **role-play** for my **Entry 1** learners. The **task** is a café scenario where a customer orders one drink. Provide a very simple dialogue script."</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-800">The AI-Generated Resource:</h4>
+                            <div class="mt-2 border rounded-lg p-4 shadow-inner bg-slate-50">
+                                <h5 class="font-bold text-lg mb-4 text-center">Role-Play: At the Café</h5>
+                                <p class="mb-2 font-medium">Example Dialogue:</p>
+                                <div class="p-3 bg-blue-100 rounded-lg space-y-1 max-w-sm">
+                                    <p><strong>Customer:</strong> "A coffee, please."</p>
+                                    <p><strong>Server:</strong> "Here you are."</p>
+                                    <p><strong>Customer:</strong> "Thank you."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Example 6 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-bold mb-4 text-slate-900">Resource Example 6: Entry 2 Writing Activity</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-slate-800">The Goal:</h4>
+                            <p>To help Entry 2 learners write simple, compound sentences on a familiar topic.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-800">The Prompt:</h4>
+                            <p class="p-3 bg-slate-100 border-l-4 border-slate-300 rounded-r-lg text-slate-600 italic">"For my **Entry 2** class, create a **writing worksheet**. The **task** is to write two sentences about their weekend. Provide a sentence starter frame to help them structure their answer."</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-800">The AI-Generated Resource:</h4>
+                            <div class="mt-2 border rounded-lg p-4 shadow-inner bg-slate-50">
+                                <h5 class="font-bold text-lg mb-4">My Weekend</h5>
+                                <p class="mb-2 font-medium">Write two sentences about your weekend. Use the ideas below to help you.</p>
+                                <div class="p-4 bg-slate-100 rounded-lg space-y-3">
+                                    <p>On Saturday, I went to ____________________ and I saw ____________________.</p>
+                                    <p>On Sunday, I liked ____________________ but I did not like ____________________.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-center mt-12 pt-8 border-t border-slate-200">
+            <p class="text-sm text-slate-500">&copy; 2025 The Creative ESL Classroom | A conceptual resource generated by Google's Gemini.</p>
+        </footer>
+
+    </div>
+
+    <!-- JavaScript for Tab Functionality -->
+    <script>
+        // Get all navigation buttons and content sections
+        const navLinks = document.querySelectorAll('.nav-link');
+        const contentSections = document.querySelectorAll('.content-section');
+
+        // Add a click event listener to each navigation button
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                const targetId = link.dataset.target;
+
+                // Remove 'active' class from all links
+                navLinks.forEach(navLink => {
+                    navLink.classList.remove('active');
+                });
+
+                // Hide all content sections
+                contentSections.forEach(section => {
+                    section.classList.add('hidden');
+                });
+
+                // Add 'active' class to the clicked link
+                link.classList.add('active');
+
+                // Show the target content section
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.classList.remove('hidden');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
